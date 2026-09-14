@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Interfaces;
 using Ecommerce.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,9 +36,9 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(ProductCreateDto dto)
         {
-            var created = await _productService.CreateAsync(product);
+            var created = await _productService.CreateAsync(dto);
 
             return CreatedAtAction(
                 nameof(GetById),
@@ -46,12 +47,9 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, Product product)
-        {
-            if (id != product.Id)
-                return BadRequest();
-
-            var updated = await _productService.UpdateAsync(product);
+        public async Task<IActionResult> Update(int id, ProductUpdateDto dto)
+        {     
+            var updated = await _productService.UpdateAsync(id, dto);
 
             if (!updated)
                 return NotFound();

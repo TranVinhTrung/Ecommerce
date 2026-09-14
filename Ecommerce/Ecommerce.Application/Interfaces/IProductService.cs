@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.Entities;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace Ecommerce.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<Product>> GetAllAsync();
+        Task<IEnumerable<ProductResponseDto>> GetAllAsync();
 
-        Task<Product?> GetByIdAsync(int id);
+        Task<ProductResponseDto?> GetByIdAsync(int id);
 
-        Task<Product> CreateAsync(Product product);
+        Task<ProductResponseDto> CreateAsync(ProductCreateDto dto);
 
-        Task<bool> UpdateAsync(Product product);
+        Task<bool> UpdateAsync(int id, ProductUpdateDto dto);
 
         Task<bool> DeleteAsync(int id);
     }

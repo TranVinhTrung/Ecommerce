@@ -4,6 +4,7 @@ using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Identity;
 using Ecommerce.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Ecommerce.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 
 var app = builder.Build();
+
+//Đăng ký middleware xử lý ngoại lệ toàn cục
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Swagger
 if (app.Environment.IsDevelopment())
