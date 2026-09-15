@@ -66,10 +66,11 @@ namespace Ecommerce.Infrastructure.Repositories
             return true;
         }
 
-        
+        public async Task<bool> ExistsByCategoryIdAsync(int categoryId)
+        {
+            return await _context.Products
+                .AnyAsync(p => p.CategoryId == categoryId);
+        }
 
-     
-
-       
     }
 }

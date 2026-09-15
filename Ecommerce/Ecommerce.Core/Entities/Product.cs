@@ -20,6 +20,9 @@ namespace Ecommerce.Core.Entities
 
         public int CategoryId { get; set; }
 
+        // Navigation Property
+        public Category Category { get; set; } = null!;
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
