@@ -21,12 +21,24 @@ namespace Ecommerce.Infrastructure.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Include(p => p.Category)
+                .ToListAsync();
         }
 
         public async Task<Product?> GetByIdAsync(int id)
         {
-           return await _context.Products.FindAsync(id);
+            /*
+             Tại sao không dùng FindAsync() nữa? Vì FindAsync() không cho mình viết: .Include(p => p.Category)
+            Còn FirstOrDefaultAsync() cho phép query kèm Include().
+            .Include(p => p.Category)
+            .FirstOrDefaultAsync(p => p.Id == id);
+            có nghĩa: Tìm Product có Id bằng id, đồng thời lấy luôn Category của Product đó.
+             */
+
+            return await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Product> AddAsync(Product product)

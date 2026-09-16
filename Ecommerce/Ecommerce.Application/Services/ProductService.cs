@@ -33,7 +33,8 @@ namespace Ecommerce.Application.Services
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
-                CategoryId = product.CategoryId
+                CategoryId = product.CategoryId,
+                CategoryName = product.Category.Name
             });
         }
 
@@ -51,7 +52,8 @@ namespace Ecommerce.Application.Services
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
-                CategoryId = product.CategoryId
+                CategoryId = product.CategoryId,
+                CategoryName = product.Category.Name
             };
         }
 
@@ -75,6 +77,7 @@ namespace Ecommerce.Application.Services
 
 
             var created = await _repository.AddAsync(product);
+            var category = await _categoryRepository.GetByIdAsync(created.CategoryId);
 
             return new ProductResponseDto
             {
@@ -83,7 +86,8 @@ namespace Ecommerce.Application.Services
                 Description = created.Description,
                 Price = created.Price,
                 Stock = created.Stock,
-                CategoryId = created.CategoryId
+                CategoryId = created.CategoryId,
+                CategoryName = category?.Name ?? string.Empty
             };
         }
 
