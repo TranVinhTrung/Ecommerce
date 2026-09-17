@@ -10,7 +10,8 @@ namespace Ecommerce.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductResponseDto>> GetAllAsync();
+        Task<PagedResultDto<ProductResponseDto>> GetAllAsync(
+            ProductQueryDto query);
 
         Task<ProductResponseDto?> GetByIdAsync(int id);
 

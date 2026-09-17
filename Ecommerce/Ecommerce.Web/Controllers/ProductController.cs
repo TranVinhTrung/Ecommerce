@@ -17,9 +17,9 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] ProductQueryDto query)
         {
-            var products = await _productService.GetAllAsync();
+            var products = await _productService.GetAllAsync(query);
 
             return Ok(products);
         }

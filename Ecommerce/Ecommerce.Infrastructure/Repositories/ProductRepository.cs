@@ -19,11 +19,10 @@ namespace Ecommerce.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public IQueryable<Product> GetQuery()
         {
-            return await _context.Products
-                .Include(p => p.Category)
-                .ToListAsync();
+            return _context.Products
+                    .Include(p => p.Category);
         }
 
         public async Task<Product?> GetByIdAsync(int id)

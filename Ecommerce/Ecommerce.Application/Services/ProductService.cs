@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Application.Services
 {
@@ -22,11 +23,68 @@ namespace Ecommerce.Application.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<IEnumerable<ProductResponseDto>> GetAllAsync()
+        public async Task<PagedResultDto<ProductResponseDto>> GetAllAsync(ProductQueryDto query)
         {
-            var products = await _repository.GetAllAsync();
+            var productsQuery =  _repository.GetQuery();
 
-            return products.Select(product => new ProductResponseDto
+            // Search theo tên Product
+            if (!string.IsNullOrWhiteSpace(query.Search))
+            {
+                productsQuery = productsQuery
+                    .Where(p => p.Name.Contains(query.Search));
+            }
+
+            // Filter theo Category
+            if (query.CategoryId.HasValue)
+            {
+                productsQuery = productsQuery
+                    .Where(p => p.CategoryId == query.CategoryId.Value);
+            }
+
+            // Sorting
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                if(query.SortBy == "price"){
+                    productsQuery = productsQuery
+                        .OrderBy(p => p.Price);
+                }
+                else if (query.SortBy == "price_desc")
+                {
+                    productsQuery = productsQuery
+                        .OrderByDescending(p => p.Price);
+                }
+                else if (query.SortBy == "name")
+                {
+                    productsQuery = productsQuery
+                        .OrderBy(p => p.Name);
+                }
+                else if (query.SortBy == "name_desc")
+                {
+                    productsQuery = productsQuery
+                        .OrderByDescending(p => p.Name);
+                }
+            }
+
+            var totalCount = await productsQuery.CountAsync();
+
+            var totalPages = (int)Math.Ceiling(
+                (double)totalCount / query.PageSize);
+
+            //Pagination
+            /* Công thức Skip = (Page - 1) × PageSize Take = PageSize Skip(): bỏ qua bao nhiêu record.
+                Take(): lấy bao nhiêu record.
+                Pagination = (Page - 1) × PageSize + Take(PageSize).
+             */
+            var skip = (query.Page - 1) * query.PageSize;
+            productsQuery = productsQuery
+                .Skip(skip)
+                .Take(query.PageSize);
+
+            //Thực thi
+            var products = await productsQuery.ToListAsync();
+
+            // Mapping
+            var items = products.Select(product => new ProductResponseDto
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -36,6 +94,16 @@ namespace Ecommerce.Application.Services
                 CategoryId = product.CategoryId,
                 CategoryName = product.Category.Name
             });
+
+            // Kết quả trả về API
+            return new PagedResultDto<ProductResponseDto>
+            {
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                CurrentPage = query.Page,
+                PageSize = query.PageSize,
+                Items = items
+            };
         }
 
         public async Task<ProductResponseDto?> GetByIdAsync(int id)
