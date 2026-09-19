@@ -130,8 +130,12 @@ namespace Ecommerce.Application.Services
 
             var categoryExists = await _categoryRepository.ExistsAsync(dto.CategoryId);
 
+            //Business Validation
             if (!categoryExists)
                 throw new BusinessException("Category does not exist.");
+
+            if (dto.Price > 1_000_000_000)
+                throw new BusinessException("Product price cannot exceed 1 billion VND.");
 
             var product = new Product
             {
@@ -163,9 +167,12 @@ namespace Ecommerce.Application.Services
         {
             var categoryExists = await _categoryRepository.ExistsAsync(dto.CategoryId);
 
+            //Business Validation
             if (!categoryExists)
                 throw new BusinessException("Category does not exist.");
 
+            if (dto.Price > 1_000_000_000)
+                throw new BusinessException("Product price cannot exceed 1 billion VND.");
 
             var product = new Product
             {

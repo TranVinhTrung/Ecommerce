@@ -1,15 +1,36 @@
+using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Application.Services;
 using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Identity;
 using Ecommerce.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Ecommerce.Web.Middleware;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            var errors = context.ModelState
+                .Where(x => x.Value?.Errors.Count > 0)
+                .ToDictionary(
+                    x => x.Key,
+                    x => x.Value!.Errors
+                        .Select(e => e.ErrorMessage)
+                        .ToArray());
+
+            return new BadRequestObjectResult(new ErrorResponseDto
+            {
+                Message = "Validation failed.",
+                Errors = errors
+            });
+        };
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
