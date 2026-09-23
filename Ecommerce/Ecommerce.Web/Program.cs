@@ -116,6 +116,15 @@ builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
 var app = builder.Build();
 
+// Seed roles
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider
+        .GetRequiredService<RoleManager<IdentityRole>>();
+
+    await RoleSeeder.SeedAsync(roleManager);
+}
+
 
 // Đăng ký middleware
 app.UseMiddleware<ExceptionHandlingMiddleware>();

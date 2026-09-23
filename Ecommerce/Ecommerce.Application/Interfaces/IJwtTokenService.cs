@@ -8,6 +8,6 @@ namespace Ecommerce.Application.Interfaces
 {
     public interface IJwtTokenService
     {
-        string GenerateToken(string userId, string userName);
+        Task<string> GenerateToken(string userId, string userName);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Application.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,22 +15,35 @@ namespace Ecommerce.Infrastructure.Identity
     public class JwtTokenService : IJwtTokenService  
     {
         private readonly IConfiguration _configuration;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public JwtTokenService(IConfiguration configuration)
+        public JwtTokenService(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
+            _userManager = userManager;
         }
 
         //Tạo token JWT dựa trên userId và userName
-        public string GenerateToken(string userId, string userName)
+        public async Task<string> GenerateToken(string userId, string userName)
         {
             var key = _configuration["Jwt:Key"]!;
 
-            var claims = new[]
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var roles = user != null
+                ? await _userManager.GetRolesAsync(user)
+                : new List<string>();
+
+            List<Claim> claims = new List<Claim>
             {
-            new Claim(ClaimTypes.NameIdentifier, userId),
-            new Claim(ClaimTypes.Name, userName)
-        };
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Name, userName)
+            };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var securityKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(key));

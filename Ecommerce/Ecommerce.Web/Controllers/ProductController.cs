@@ -38,6 +38,7 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ProductCreateDto dto)
         {
             var created = await _productService.CreateAsync(dto);
@@ -49,6 +50,7 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, ProductUpdateDto dto)
         {     
             var updated = await _productService.UpdateAsync(id, dto);
@@ -60,6 +62,7 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var deleted = await _productService.DeleteAsync(id);

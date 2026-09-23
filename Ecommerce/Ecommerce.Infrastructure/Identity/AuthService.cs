@@ -38,7 +38,12 @@ namespace Ecommerce.Infrastructure.Identity
                 user,
                 dto.Password);
 
-            return result.Succeeded;
+            if (!result.Succeeded)
+                return false;
+
+            await _userManager.AddToRoleAsync(user, "User");
+
+            return true;
         }
 
         public async Task<string?> LoginAsync(LoginDto dto)
@@ -55,7 +60,7 @@ namespace Ecommerce.Infrastructure.Identity
             if (!result)
                 return null;
 
-            var token = _jwtTokenService.GenerateToken(
+            var token = await _jwtTokenService.GenerateToken(
                 user.Id,
                 user.UserName!);
 
