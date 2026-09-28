@@ -23,6 +23,8 @@ namespace Ecommerce.Core.Entities
         // Navigation Property
         public Category Category { get; set; } = null!;
 
+        public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

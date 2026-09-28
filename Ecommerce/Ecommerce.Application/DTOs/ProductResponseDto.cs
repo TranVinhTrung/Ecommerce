@@ -24,5 +24,7 @@ namespace Ecommerce.Application.DTOs
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; } = string.Empty;
+
+        public List<ProductImageDto> Images { get; set; } = new();
     }
 }

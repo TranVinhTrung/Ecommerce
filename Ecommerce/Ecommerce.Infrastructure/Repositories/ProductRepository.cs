@@ -22,7 +22,8 @@ namespace Ecommerce.Infrastructure.Repositories
         public IQueryable<Product> GetQuery()
         {
             return _context.Products
-                    .Include(p => p.Category);
+                    .Include(p => p.Category)
+                    .Include(p => p.Images);
         }
 
         public async Task<Product?> GetByIdAsync(int id)
@@ -37,6 +38,7 @@ namespace Ecommerce.Infrastructure.Repositories
 
             return await _context.Products
                 .Include(p => p.Category)
+                .Include(p => p.Images)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
