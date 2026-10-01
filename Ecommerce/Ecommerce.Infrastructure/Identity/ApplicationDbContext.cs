@@ -19,6 +19,8 @@ namespace Ecommerce.Infrastructure.Identity
         public DbSet<Category> Categories { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,13 +34,43 @@ namespace Ecommerce.Infrastructure.Identity
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);      // Ngăn chặn xóa danh mục nếu có sản phẩm liên quan
 
             builder.Entity<ProductImage>()
                 .HasOne(pi => pi.Product)
                 .WithMany(p => p.Images)
                 .HasForeignKey(pi => pi.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);      // Xóa các hình ảnh liên quan khi xóa sản phẩm
+
+            builder.Entity<Cart>()
+                .HasOne<ApplicationUser>()
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Cart>()
+                .HasIndex(c => c.UserId)
+                .IsUnique();
+
+            builder.Entity<CartItem>()
+                .HasOne(ci => ci.Cart)                  // Thiết lập quan hệ giữa CartItem và Cart
+                .WithMany(c => c.Items)                 // Một Cart có nhiều CartItem
+                .HasForeignKey(ci => ci.CartId)         // Khóa ngoại trong CartItem trỏ đến Cart
+                .OnDelete(DeleteBehavior.Cascade);      // Xóa các CartItem liên quan khi xóa Cart
+
+            builder.Entity<CartItem>()
+                .HasOne(ci => ci.Product)               // Thiết lập quan hệ giữa CartItem và Product
+                .WithMany()                             // Một Product có thể có nhiều CartItem
+                .HasForeignKey(ci => ci.ProductId)      // Khóa ngoại trong CartItem trỏ đến Product
+                .OnDelete(DeleteBehavior.Restrict);     // Ngăn chặn xóa sản phẩm nếu có CartItem liên quan  
+
+            builder.Entity<CartItem>()
+                .HasIndex(ci => new { ci.CartId, ci.ProductId })
+                .IsUnique();
+
+            builder.Entity<CartItem>()
+                .Property(ci => ci.UnitPrice)
+                .HasPrecision(18, 2);
         }
-    }
+    }   
 }

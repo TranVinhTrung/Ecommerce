@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Exceptions;
 using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -46,7 +47,10 @@ namespace Ecommerce.Infrastructure.Identity
                 dto.Password);
 
             if (!result.Succeeded)
-                return false;
+            {
+                var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+                throw new BusinessException(errors);
+            }
 
             await _userManager.AddToRoleAsync(user, "User");
 

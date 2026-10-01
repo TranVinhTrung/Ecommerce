@@ -40,7 +40,8 @@ namespace Ecommerce.Application.Services
             {
                 ProductId = productId,
                 ImageUrl = imageUrl,
-                IsPrimary = isPrimary
+                IsPrimary = isPrimary,
+                CreatedAt = DateTime.UtcNow
             };
 
             await _imageRepository.AddAsync(image);
