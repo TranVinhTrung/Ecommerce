@@ -85,5 +85,10 @@ namespace Ecommerce.Infrastructure.Repositories
                 .AnyAsync(p => p.CategoryId == categoryId);
         }
 
+        public async Task<Product?> GetByIdForUpdateAsync(int id)
+        {
+            return await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

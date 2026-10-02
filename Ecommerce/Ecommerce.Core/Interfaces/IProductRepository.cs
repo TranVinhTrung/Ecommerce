@@ -24,5 +24,6 @@ namespace Ecommerce.Core.Interfaces
         Task<bool> DeleteAsync(int id);
 
         Task<bool> ExistsByCategoryIdAsync(int categoryId);
+        Task<Product?> GetByIdForUpdateAsync(int id);
     }
 }
