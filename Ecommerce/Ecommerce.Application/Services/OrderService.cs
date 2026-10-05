@@ -37,7 +37,7 @@ namespace Ecommerce.Application.Services
             {
                 UserId = userId,
                 CreatedAt = DateTime.UtcNow,
-                Status = "Pending"
+                Status = Order.Pending
             };
 
             foreach (var cartItem in cart.Items)
@@ -122,5 +122,38 @@ namespace Ecommerce.Application.Services
             };
         }
 
+        public async Task<bool> UpdateOrderStatusAsync(string userId, int orderId, string status)
+        {
+            var validStatuses = new[] { Order.Pending, Order.Confirmed, Order.Shipping, Order.Completed, Order.Cancelled };
+
+            if (!validStatuses.Contains(status))
+                throw new BusinessException("Invalid order status.");
+
+
+            var order = await _orderRepository.GetByIdAsync(orderId);
+
+            if (order == null)
+                return false;
+
+            var isValidTransition = order.Status switch
+            {
+                Order.Pending => status == Order.Confirmed || status == Order.Cancelled,
+                Order.Confirmed => status == Order.Shipping,
+                Order.Shipping => status == Order.Completed,
+                _ => false
+            };
+
+            if (!isValidTransition)
+                throw new BusinessException(
+                    $"Cannot change order status from '{order.Status}' to '{status}'.");
+
+
+            order.Status = status;
+            order.UpdatedAt = DateTime.UtcNow;
+
+            await _orderRepository.UpdateAsync(order);
+
+            return true;
+        }
     }
 }

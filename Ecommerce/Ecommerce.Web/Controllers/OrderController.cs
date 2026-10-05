@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -61,5 +62,26 @@ namespace Ecommerce.Web.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut("{orderId}/status")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, UpdateOrderStatusDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                return Unauthorized();
+
+            var result = await _orderService.UpdateOrderStatusAsync(userId, orderId, dto.Status);
+
+            if (!result)
+                return NotFound(new
+                {
+                    message = "Order not found."
+                });
+
+            return NoContent();
+        }
+
     }
 }

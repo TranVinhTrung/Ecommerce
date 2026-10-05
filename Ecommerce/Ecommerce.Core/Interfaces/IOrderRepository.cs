@@ -14,5 +14,9 @@ namespace Ecommerce.Core.Interfaces
         Task<List<Order>> GetByUserIdAsync(string userId);
 
         Task<Order?> GetByIdAsync(string userId, int orderId);
+
+        Task<Order?> GetByIdAsync(int orderId);  //dành cho admin lấy order không bị giói hạn user
+
+        Task UpdateAsync(Order order);
     }
 }

@@ -14,5 +14,6 @@ namespace Ecommerce.Application.Interfaces
         Task<List<OrderResponseDto>> GetOrdersAsync(string userId);
 
         Task<OrderResponseDto?> GetOrderByIdAsync(string userId, int orderId);
+        Task<bool> UpdateOrderStatusAsync(string userId, int orderId, string status);
     }
 }

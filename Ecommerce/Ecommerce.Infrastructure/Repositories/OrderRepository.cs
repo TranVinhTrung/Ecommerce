@@ -43,6 +43,18 @@ namespace Ecommerce.Infrastructure.Repositories
            .FirstOrDefaultAsync(o =>
                o.Id == orderId &&
                o.UserId == userId);
-        }   
+        }
+
+        public async Task<Order?> GetByIdAsync(int orderId)
+        {
+            return await _context.Orders
+                .Include(o => o.Items)
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
+        public async Task UpdateAsync(Order order)
+        {
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+        }
     }
 }
