@@ -23,6 +23,7 @@ namespace Ecommerce.Infrastructure.Identity
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -96,6 +97,16 @@ namespace Ecommerce.Infrastructure.Identity
 
             builder.Entity<OrderItem>()
                 .Property(oi => oi.Subtotal)
+                .HasPrecision(18, 2);
+
+            builder.Entity<Payment>()
+                .HasOne(p => p.Order)
+                .WithMany()
+                .HasForeignKey(p => p.OrderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Payment>()
+                .Property(p => p.Amount)    
                 .HasPrecision(18, 2);
         }
     }   
