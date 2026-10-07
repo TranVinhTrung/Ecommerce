@@ -4,46 +4,440 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Ecommerce.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Ecommerce.Web.styles.css" asp-append-version="true" />
+    
+    <!--favicon-->
+    <link rel="icon" href="~/assets/images/favicon.png" type="image/png">
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+
+    <!--Plugins-->
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="~/assets/plugins/swiper/css/swiper-bundle.min.css">
+
+    <!--Bootstrap files-->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/bootstrap-icons.min.css">
+    <!--main style sheet-->
+    <link href="~/assets/sass/style.css" rel="stylesheet">
+
+
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ecommerce.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+   
+    <!--start header-->
+    <header class="top-header py-2">
+        <div class="top-strip d-flex align-items-center gap-4 container px-3">
+            <div class="strip-menu-left d-none d-lg-flex">
+                <ul class="nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="javascript:;">Shipping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="javascript:;">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="javascript:;">Returns Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-1" href="javascript:;">Track Order</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="strip-social-links ms-lg-auto flex-lg-grow-0 flex-grow-1">
+                <ul class="nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;"><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;"><i class="bi bi-twitter-x"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;"><i class="bi bi-linkedin"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:;"><i class="bi bi-pinterest"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown language">
+                <a class="btn btn-sm btn-language btn-outline-light border-0 d-flex align-items-center gap-2 px-2 dropdown-toggle dropdown-toggle-nocaret"
+                   href="javascript:;" data-bs-toggle="dropdown">
+                    <span>English</span><span><i class="bi bi-chevron-down"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="javascript:;">French</a></li>
+                    <li><a class="dropdown-item" href="javascript:;">Spanish</a></li>
+                    <li><a class="dropdown-item" href="javascript:;">hindi</a></li>
+                </ul>
+            </div>
+            <div class="dropdown language">
+                <a class="btn btn-sm btn-language btn-outline-light border-0 d-flex align-items-center gap-2 px-2 dropdown-toggle dropdown-toggle-nocaret"
+                   href="javascript:;" data-bs-toggle="dropdown">
+                    <span>USD</span><span><i class="bi bi-chevron-down"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="javascript:;">EUR</a></li>
+                    <li><a class="dropdown-item" href="javascript:;">INR</a></li>
+                    <li><a class="dropdown-item" href="javascript:;">KGM</a></li>
+                    <li><a class="dropdown-item" href="javascript:;">DSR</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!--end header-->
+
+    <!--start nav-->
+    <nav class="navbar navbar-expand-xl border-bottom py-3">
+        <div class="container px-3">
+            <a class="navbar-brand d-none d-xl-flex" href="index.html">
+                <img src="~/assets/images/gallery/logo.png" class="logo-img" alt="">
+            </a>
+            <button type="button" class="d-xl-none btn-menu-close" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
+                <div class="offcanvas-header">
+                    <img src="~/assets/images/gallery/logo.png" class="logo-img2" alt="">
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="nav-search p-3 pt-0 border-bottom d-flex d-xl-none">
+                    <form class="position-relative w-100">
+                        <input type="text" class="form-control nav-search-control ps-5 border-0 py-2" placeholder="what are you looking for ?">
+                        <span class="position-absolute top-50 start-0 translate-middle-y"><i class="bi bi-search fs-6 ms-3"></i></span>
+                    </form>
+                </div>
+                <div class="offcanvas-body p-0">
+                    <ul class="navbar-nav mx-auto gap-0 gap-xl-2">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" href="index.html">
+                                <span class="parent-menu-name">Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                                <span class="parent-menu-name">Shop</span>
+                                <span class="parent-menu-icon ms-2"><i class="bi bi-chevron-down"></i></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="shop-grid-left-sidebar.html">Shop Grid Leftside</a></li>
+                                <li><a class="dropdown-item" href="shop-grid-right-sidebar.html">Shop Grid Rightside</a></li>
+                                <li><a class="dropdown-item" href="shop-list-left-sidebar.html">Shop List Leftside</a></li>
+                                <li><a class="dropdown-item" href="shop-list-right-sidebar.html">Shop List Rightside</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="shop-grid-offcanvas-filter.html">Shop Grid Offcanvas</a></li>
+                                <li><a class="dropdown-item" href="shop-list-ofcanvas-filter.html">Shop List Offcanvas</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret d-flex align-items-center justify-content-between" href="javascript:;"
+                                       data-bs-toggle="dropdown">
+                                        <span>Shop Categories</span>
+                                        <span><i class="bi bi-chevron-right"></i></span>
+                                    </a>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="shop-circular-catgories.html">Circular View</a></li>
+                                        <li><a class="dropdown-item" href="shop-grid-catgories.html">Grid View</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="product-detail.html">Product Details</a></li>
+                                <li><a class="dropdown-item" href="product-detail-grid.html">Product Detail Grid</a></li>
+                                <li><a class="dropdown-item" href="shopping-cart.html">Shopping Cart</a></li>
+                                <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
+                                <li><a class="dropdown-item" href="wishlist.html">Wishlist</a></li>
+                                <li><a class="dropdown-item" href="wishlist-2.html">Wishlist 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown position-static">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                                <span class="parent-menu-name">Fashion</span>
+                                <span class="parent-menu-icon ms-2"><i class="bi bi-chevron-down"></i></span>
+                            </a>
+                            <div class="dropdown-menu mega-menu p-lg-3 start-0 end-0 rounded-0">
+                                <div class="container px-3">
+                                    <div class="row row-cols-1 row-cols-lg-5 g-3">
+                                        <div class="col">
+                                            <div class="list-group list-group-flush">
+                                                <h5 class="list-group-item mega-menu-title px-0 mb-0">Apparel</h5>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Casual Wear</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Formal Wear</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Streetwear</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Athleisure</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Loungewear</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Outerwear</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Ethnic Wear</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Pajamas</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Oversized</a>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="list-group list-group-flush">
+                                                <h5 class="list-group-item mega-menu-title mb-0 px-0">Footwear</h5>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Sneakers</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Boots</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Formal Shoes</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Sandals</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Sports Shoes</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Dress shoes</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Luxury Sneakers</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Chelsea Boots</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Training Shoes</a>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="list-group list-group-flush">
+                                                <h5 class="list-group-item mega-menu-title mb-0 px-0">Accessories</h5>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Backpacks</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Watches</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Sunglasses</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Jewelry</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Leather Belts</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Smartwatches</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Casual Watches</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Baseball Caps</a>
+                                                <a href="javascript:;" class="list-group-item mega-menu-link px-0">Designer Belts</a>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="list-group">
+                                                <div class="card border">
+                                                    <div class="card-body p-2">
+                                                        <div class="position-relative">
+                                                            <img src="~/assets/images/gallery/mega-menu-img-1.jpg" class="img-fluid rounded" alt="">
+                                                            <div class="position-absolute bottom-0 end-0 start-0 m-3">
+                                                                <button type="button" class="btn border bg-white px-4 rounded-3 w-100">Women</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="list-group">
+                                                <div class="card border">
+                                                    <div class="card-body p-2">
+                                                        <div class="position-relative">
+                                                            <img src="~/assets/images/gallery/mega-menu-img-2.jpg" class="img-fluid rounded" alt="">
+                                                            <div class="position-absolute bottom-0 end-0 start-0 m-3">
+                                                                <button type="button" class="btn border bg-white px-4 rounded-3 w-100">Men</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end row-->
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                                <span class="parent-menu-name">Blog</span>
+                                <span class="parent-menu-icon ms-2"><i class="bi bi-chevron-down"></i></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="blog.html">Blog Post</a></li>
+                                <li><a class="dropdown-item" href="blog-grid.html">Blog Grid</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                                <span class="parent-menu-name">Pages</span>
+                                <span class="parent-menu-icon ms-2"><i class="bi bi-chevron-down"></i></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret d-flex align-items-center justify-content-between" href="javascript:;"
+                                       data-bs-toggle="dropdown">
+                                        <span>Account</span>
+                                        <span><i class="bi bi-chevron-right"></i></span>
+                                    </a>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="account-orders.html">Orders</a></li>
+                                        <li><a class="dropdown-item" href="account-my-profile.html">Profile</a></li>
+                                        <li><a class="dropdown-item" href="account-addresses.html">Addresses</a></li>
+                                        <li><a class="dropdown-item" href="account-payment-methods.html">Payment Methods</a></li>
+                                        <li><a class="dropdown-item" href="account-wishlist.html">Wishlist</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret d-flex align-items-center justify-content-between" href="javascript:;"
+                                       data-bs-toggle="dropdown">
+                                        <span>Authentication</span>
+                                        <span><i class="bi bi-chevron-right"></i></span>
+                                    </a>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="auth-login.html">Login</a></li>
+                                        <li><a class="dropdown-item" href="auth-register.html">Register</a></li>
+                                        <li><a class="dropdown-item" href="auth-forgot-password.html">Forgot Password</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" href="about-us.html">
+                                <span class="parent-menu-name">About</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact-us.html">
+                                <span class="parent-menu-name">Contact</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+            <div class="right-links nav gap-2 d-flex">
+                <a class="nav-link" href="javascript:;" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="bi bi-search"></i></a>
+                <a class="nav-link" href="account-my-profile.html"><i class="bi bi-person-circle"></i></a>
+                <a class="nav-link position-relative" href="wishlist.html"><i class="bi bi-heart"></i><span class="notify-badge">5</span></a>
+                <a class="nav-link position-relative" data-bs-toggle="offcanvas" href="#offcanvasCart"><i class="bi bi-basket2"></i><span class="notify-badge">8</span></a>
+            </div>
+        </div>
+    </nav>
+    <!--end nav-->
+
+    <div>
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Ecommerce.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <!--footer widgets-->
+    <section class="footer-widgets py-5 border-top">
+        <div class="container px-3">
+            <div class="row g-4">
+                <div class="col-12 col-lg-4">
+                    <div class="footer-widget-1">
+                        <div class="">
+                            <img src="~/assets/images/gallery/logo.png" width="130" alt="">
+                        </div>
+                        <div>
+                            <address>
+                                <strong>Address:</strong>
+                                84-A London Street, United Kingdom
+                            </address>
+                        </div>
+                        <p><button type="button" class="btn btn-sm btn-outline-dark px-4">Get Darection<i class="bi bi-arrow-up-right ms-2"></i></button></p>
+                        <p><span><i class="bi bi-envelope me-2"></i></span>example@gmail.com</p>
+                        <p><span><i class="bi bi-telephone me-2"></i></span>648-378-2255</p>
+                        <p><span><i class="bi bi-globe me-2"></i></span>www.codervent.com</p>
+                        <div class="social-link d-flex align-items-center gap-2">
+                            <a href="javascript:;" class="btn btn-outline-dark"><i class="bi bi-facebook"></i></a>
+                            <a href="javascript:;" class="btn btn-outline-dark"><i class="bi bi-twitter-x"></i></a>
+                            <a href="javascript:;" class="btn btn-outline-dark"><i class="bi bi-instagram"></i></a>
+                            <a href="javascript:;" class="btn btn-outline-dark"><i class="bi bi-youtube"></i></a>
+                            <a href="javascript:;" class="btn btn-outline-dark"><i class="bi bi-amazon"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <div class="d-flex align-items-start justify-content-between gap-4">
+                        <div class="">
+                            <h5 class="mb-3">Top Categories</h5>
+                            <ul class="list-unstyled d-flex flex-column gap-2">
+                                <li><a href="shop-circular-catgories.html" class="footer-link">Topwear</a></li>
+                                <li><a href="shop-list-left-sidebar.html" class="footer-link">Accessories</a></li>
+                                <li><a href="shop-grid-offcanvas-filter.html" class="footer-link">Men Fashion</a></li>
+                                <li><a href="shop-list-right-sidebar.html" class="footer-link">Gym Fitness</a></li>
+                                <li><a href="shop-list-ofcanvas-filter.html" class="footer-link">Sunglass</a></li>
+                                <li><a href="shop-grid-left-sidebar.html" class="footer-link">Jeans</a></li>
+                                <li><a href="shop-grid-left-sidebar.html" class="footer-link">Formal Pants</a></li>
+                                <li><a href="shop-grid-left-sidebar.html" class="footer-link">Lingerie</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-widget-3">
+                            <h5 class="mb-3">Account</h5>
+                            <ul class="list-unstyled d-flex flex-column gap-2">
+                                <li><a href="checkout.html" class="footer-link">Order tracking</a></li>
+                                <li><a href="javascript:;" class="footer-link">Shipping policy</a></li>
+                                <li><a href="account-my-profile.html" class="footer-link">Your account</a></li>
+                                <li><a href="account-addresses.html" class="footer-link">Delivery info</a></li>
+                                <li><a href="javascript:;" class="footer-link">Taxes & fees</a></li>
+                                <li><a href="javascript:;" class="footer-link">Refunds policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 offset-lg-1">
+                    <div class="footer-widget-4">
+                        <h5 class="mb-3">Newletter</h5>
+                        <p class="news-letter-caption">Subscribe to our newsletter and enjoy 10% off your first order</p>
+                        <form method="post">
+                            <div class="input-group input-group-lg mt-3">
+                                <input type="email" class="form-control border-dark" placeholder="Enter your email" required>
+                                <button class="btn btn-dark" type="submit"><i class="bi bi-arrow-up-right"></i></button>
+                            </div>
+                        </form>
+                        <p class="news-letter-caption mt-4 mb-2">Download Mobile Application</p>
+                        <div class="d-flex align-items-center gap-3">
+                            <a href="javascript:;"><img src="~/assets/images/gallery/google-play-store.png" width="140" class="rounded-3" alt=""></a>
+                            <a href="javascript:;"><img src="~/assets/images/gallery/apple-play-store.png" width="140" class="rounded-3" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end row-->
+        </div>
+    </section>
+    <!--end footer widgets-->
+
+    <!--start footer strip-->
+    <footer class="footer-strip py-4 border-top">
+        <div class="container px-3">
+            <div class="row g-4">
+                <div class="col-12 col-lg-auto">
+                    <p class="mb-0 font-12">All rights reserved. Made by Codervent</p>
+                </div>
+                <div class="col-12 col-lg-auto">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="javascript:;" class="font-12 text-secondary">Privacy</a>
+                        <a href="javascript:;" class="font-12 text-secondary">Affiliates</a>
+                        <a href="javascript:;" class="font-12 text-secondary">Terms of use</a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-auto ms-lg-auto">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="javascript:;"><img src="~/assets/images/gallery/payment/paypal.png" class="img-fluid" width="60" alt=""></a>
+                        <a href="javascript:;"><img src="~/assets/images/gallery/payment/visa.png" class="img-fluid" width="50" alt=""></a>
+                        <a href="javascript:;"><img src="~/assets/images/gallery/payment/money.png" class="img-fluid" width="35" alt=""></a>
+                        <a href="javascript:;"><img src="~/assets/images/gallery/payment/stripe.png" class="img-fluid" width="40" alt=""></a>
+                    </div>
+                </div>
+            </div><!--end row-->
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!--end footer strip-->
+
+
+    
+
+    
+    <!--JS file-->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="~/assets/plugins/swiper/js/swiper-bundle.min.js"></script>
+    <script src="~/assets/js/search-slider.js"></script>
+    <!-- Initialize Swiper -->
+    <script src="~/assets/js/index.js"></script>
+    <!-- Initialize Swiper -->
+    <script src="~/assets/js/product-details.js"></script>
+
+    <script src="~/assets/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
