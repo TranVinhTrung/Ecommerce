@@ -20,6 +20,10 @@ namespace Ecommerce.Core.Entities
 
         public int CategoryId { get; set; }
 
+        public int? BrandId { get; set; }
+
+        public Brand? Brand { get; set; }
+
         // Navigation Property
         public Category Category { get; set; } = null!;
 

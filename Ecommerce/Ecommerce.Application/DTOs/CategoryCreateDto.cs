@@ -15,5 +15,6 @@ namespace Ecommerce.Application.DTOs
 
         [StringLength(1000)]
         public string? Description { get; set; }
+        public int? ParentCategoryId { get; set; }
     }
 }

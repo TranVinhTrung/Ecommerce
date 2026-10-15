@@ -14,6 +14,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Localization: hỗ trợ tiếng Việt và tiếng Anh
+builder.Services.AddLocalization(options =>
+{
+    options.ResourcesPath = "Resources";
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .ConfigureApiBehaviorOptions(options =>
@@ -129,6 +135,24 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+
+
+// Cấu hình ngôn ngữ được hỗ trợ
+var supportedCultures = new[]
+{
+    new System.Globalization.CultureInfo("vi"),
+    new System.Globalization.CultureInfo("en")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("vi");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 var app = builder.Build();
 
 // Seed roles
@@ -164,6 +188,10 @@ app.UseAuthentication();
 
 // Authorization: kiểm tra [Authorize]
 app.UseAuthorization();
+
+// Áp dụng ngôn ngữ cho request
+app.UseRequestLocalization(app.Services.GetRequiredService<
+        Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value);
 
 // Swagger
 if (app.Environment.IsDevelopment())

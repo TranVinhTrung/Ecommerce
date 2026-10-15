@@ -51,6 +51,7 @@ namespace Ecommerce.Infrastructure.Repositories
 
             existingCategory.Name = category.Name;
             existingCategory.Description = category.Description;
+            existingCategory.ParentCategoryId = category.ParentCategoryId;
             existingCategory.UpdatedAt = DateTime.Now;
 
             await _context.SaveChangesAsync();

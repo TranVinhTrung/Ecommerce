@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Ecommerce.Web.SharedResource> Localizer
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,8 +26,8 @@
     <link rel="stylesheet" href="~/assets/css/bootstrap-icons.min.css">
     <!--main style sheet-->
     <link href="~/assets/sass/style.css" rel="stylesheet">
-
-
+    <!--Custom-->
+    <link href="~/css/custom-menu.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -36,16 +38,16 @@
             <div class="strip-menu-left d-none d-lg-flex">
                 <ul class="nav align-items-center gap-2">
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="javascript:;">Shipping</a>
+                        <a class="nav-link py-1" href="javascript:;">@Localizer["Shipping"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="javascript:;">FAQ</a>
+                        <a class="nav-link py-1" href="javascript:;">@Localizer["FAQ"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="javascript:;">Returns Policy</a>
+                        <a class="nav-link py-1" href="javascript:;">@Localizer["ReturnsPolicy"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-1" href="javascript:;">Track Order</a>
+                        <a class="nav-link py-1" href="javascript:;">@Localizer["TrackOrder"]</a>
                     </li>
                 </ul>
             </div>
@@ -66,16 +68,31 @@
                 </ul>
             </div>
             <div class="dropdown language">
-                <a class="btn btn-sm btn-language btn-outline-light border-0 d-flex align-items-center gap-2 px-2 dropdown-toggle dropdown-toggle-nocaret"
-                   href="javascript:;" data-bs-toggle="dropdown">
-                    <span>English</span><span><i class="bi bi-chevron-down"></i></span>
+                <a class="btn btn-sm btn-language btn-outline-light border-0
+                    d-flex align-items-center gap-2 px-2 dropdown-toggle dropdown-toggle-nocaret"
+                   href="#" data-bs-toggle="dropdown">
+                    <span>@(System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("en") ? "English" : "Tiếng Việt")</span>
+                    <i class="bi bi-chevron-down"></i>
                 </a>
+
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="javascript:;">French</a></li>
-                    <li><a class="dropdown-item" href="javascript:;">Spanish</a></li>
-                    <li><a class="dropdown-item" href="javascript:;">hindi</a></li>
+                    <li>
+                        <form asp-controller="Culture" asp-action="SetLanguage" method="post">
+                            <input type="hidden" name="culture" value="vi" />
+                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                            <button type="submit" class="dropdown-item">Tiếng Việt</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form asp-controller="Culture" asp-action="SetLanguage" method="post">
+                            <input type="hidden" name="culture" value="en" />
+                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                            <button type="submit" class="dropdown-item">English</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
+
             <div class="dropdown language">
                 <a class="btn btn-sm btn-language btn-outline-light border-0 d-flex align-items-center gap-2 px-2 dropdown-toggle dropdown-toggle-nocaret"
                    href="javascript:;" data-bs-toggle="dropdown">
@@ -96,7 +113,7 @@
     <nav class="navbar navbar-expand-xl border-bottom py-3">
         <div class="container px-3">
             <a class="navbar-brand d-none d-xl-flex" href="index.html">
-                <img src="~/assets/images/gallery/logo.png" class="logo-img" alt="">
+                <img src="assets/images/gallery/logo.png" class="logo-img" alt="">
             </a>
             <button type="button" class="d-xl-none btn-menu-close" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar">
@@ -104,7 +121,7 @@
             </button>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
                 <div class="offcanvas-header">
-                    <img src="~/assets/images/gallery/logo.png" class="logo-img2" alt="">
+                    <img src="assets/images/gallery/logo.png" class="logo-img2" alt="">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="nav-search p-3 pt-0 border-bottom d-flex d-xl-none">
@@ -120,6 +137,38 @@
                                 <span class="parent-menu-name">Home</span>
                             </a>
                         </li>
+
+
+                        <!--start menu categories -->
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret"
+                               href="javascript:;"
+                               data-bs-toggle="dropdown">
+                                <span class="parent-menu-name">@Localizer["Categories"]</span>
+                                <span class="parent-menu-icon ms-2">
+                                    <i class="bi bi-chevron-down"></i>
+                                </span>
+                            </a>
+
+                            @await Component.InvokeAsync("CategoryMenu")
+                        </li>
+
+                        <!--end menu categories -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
                                 <span class="parent-menu-name">Shop</span>
@@ -157,6 +206,7 @@
                                 <li><a class="dropdown-item" href="wishlist-2.html">Wishlist 2</a></li>
                             </ul>
                         </li>
+
                         <li class="nav-item dropdown position-static">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
                                 <span class="parent-menu-name">Fashion</span>
@@ -212,7 +262,7 @@
                                                 <div class="card border">
                                                     <div class="card-body p-2">
                                                         <div class="position-relative">
-                                                            <img src="~/assets/images/gallery/mega-menu-img-1.jpg" class="img-fluid rounded" alt="">
+                                                            <img src="assets/images/gallery/mega-menu-img-1.jpg" class="img-fluid rounded" alt="">
                                                             <div class="position-absolute bottom-0 end-0 start-0 m-3">
                                                                 <button type="button" class="btn border bg-white px-4 rounded-3 w-100">Women</button>
                                                             </div>
@@ -226,7 +276,7 @@
                                                 <div class="card border">
                                                     <div class="card-body p-2">
                                                         <div class="position-relative">
-                                                            <img src="~/assets/images/gallery/mega-menu-img-2.jpg" class="img-fluid rounded" alt="">
+                                                            <img src="assets/images/gallery/mega-menu-img-2.jpg" class="img-fluid rounded" alt="">
                                                             <div class="position-absolute bottom-0 end-0 start-0 m-3">
                                                                 <button type="button" class="btn border bg-white px-4 rounded-3 w-100">Men</button>
                                                             </div>
@@ -309,6 +359,7 @@
         </div>
     </nav>
     <!--end nav-->
+
 
     <div>
         <main role="main">
@@ -436,6 +487,7 @@
     <script src="~/assets/js/index.js"></script>
     <!-- Initialize Swiper -->
     <script src="~/assets/js/product-details.js"></script>
+    <!--Custom-->
 
     <script src="~/assets/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

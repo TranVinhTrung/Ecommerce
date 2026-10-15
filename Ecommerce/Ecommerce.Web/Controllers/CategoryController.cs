@@ -18,6 +18,7 @@ namespace Ecommerce.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var categories = await _categoryService.GetAllAsync();
@@ -68,6 +69,5 @@ namespace Ecommerce.Web.Controllers
 
             return NoContent();
         }
-
     }
 }

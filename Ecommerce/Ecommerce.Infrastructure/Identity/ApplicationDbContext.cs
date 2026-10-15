@@ -17,6 +17,7 @@ namespace Ecommerce.Infrastructure.Identity
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Cart> Carts { get; set; }
@@ -38,6 +39,23 @@ namespace Ecommerce.Infrastructure.Identity
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);      // Ngăn chặn xóa danh mục nếu có sản phẩm liên quan
+
+            builder.Entity<Category>()
+                .HasOne(c => c.ParentCategory)
+                .WithMany(c => c.SubCategories)
+                .HasForeignKey(c => c.ParentCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Category>()
+                .HasMany(c => c.Brands)
+                .WithMany(b => b.Categories)
+                .UsingEntity("CategoryBrands");
+
+            builder.Entity<Product>()
+                .HasOne(p => p.Brand)
+                .WithMany()
+                .HasForeignKey(p => p.BrandId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<ProductImage>()
                 .HasOne(pi => pi.Product)

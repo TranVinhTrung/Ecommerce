@@ -30,6 +30,7 @@ namespace Ecommerce.Application.Services
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+                ParentCategoryId = category.ParentCategoryId,
                 CreatedAt = category.CreatedAt,
                 UpdatedAt = category.UpdatedAt
             });
@@ -45,6 +46,7 @@ namespace Ecommerce.Application.Services
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+                ParentCategoryId = category.ParentCategoryId,
                 CreatedAt = category.CreatedAt,
                 UpdatedAt = category.UpdatedAt
             };
@@ -52,10 +54,23 @@ namespace Ecommerce.Application.Services
 
         public async Task<CategoryResponseDto> CreateAsync(CategoryCreateDto dto)
         {
+            if (dto.ParentCategoryId.HasValue)
+            {
+                var parentExists = await _repository.ExistsAsync(
+                    dto.ParentCategoryId.Value);
+
+                if (!parentExists)
+                {
+                    throw new BusinessException(
+                        $"Parent category with ID {dto.ParentCategoryId.Value} not found.");
+                }
+            }
+
             var category = new Category
             {
                 Name = dto.Name,
                 Description = dto.Description,
+                ParentCategoryId = dto.ParentCategoryId,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = null
             };
@@ -67,22 +82,61 @@ namespace Ecommerce.Application.Services
                 Id = created.Id,
                 Name = created.Name,
                 Description = created.Description,
+                ParentCategoryId = created.ParentCategoryId,
                 CreatedAt = created.CreatedAt
             };
         }
 
+
         public async Task<bool> UpdateAsync(int id, CategoryUpdateDto dto)
         {
+            var existingCategory = await _repository.GetByIdAsync(id);
+
+            if (existingCategory == null)
+                return false;
+
+            if (dto.ParentCategoryId.HasValue)
+            {
+                if (dto.ParentCategoryId.Value == id) throw new BusinessException( "A category cannot be its own parent.");
+
+                var parentExists = await _repository.ExistsAsync(
+                    dto.ParentCategoryId.Value);
+
+                if (!parentExists)
+                    throw new BusinessException(
+                        "Parent category does not exist.");
+
+                var categories = await _repository.GetAllAsync();
+                var categoryLookup = categories.ToDictionary(c => c.Id);
+
+                var currentParentId = dto.ParentCategoryId;
+
+                while (currentParentId.HasValue)
+                {
+                    if (currentParentId.Value == id)
+                        throw new BusinessException(
+                            "Circular category hierarchy is not allowed.");
+
+                    if (!categoryLookup.TryGetValue(
+                            currentParentId.Value, out var parent))
+                        break;
+
+                    currentParentId = parent.ParentCategoryId;
+                }
+            }
+
             var category = new Category
             {
                 Id = id,
                 Name = dto.Name,
                 Description = dto.Description,
-                UpdatedAt = DateTime.Now
+                ParentCategoryId = dto.ParentCategoryId,
+                UpdatedAt = DateTime.UtcNow
             };
 
             return await _repository.UpdateAsync(category);
         }
+
 
         public async Task<bool> DeleteAsync(int id)
         {

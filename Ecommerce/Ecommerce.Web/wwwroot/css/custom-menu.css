@@ -1,0 +1,26 @@
+﻿.brand-menu-item {
+    width: 100%;
+}
+
+.brand-menu-link {
+    width: 100%;
+    min-height: 48px; /* Chiều cao card chứa logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 126px;
+}
+
+.brand-menu-logo {
+    display: block;
+    width: 100%; /* Chiều rộng logo */
+    max-width: 90px; /* Chiều rộng tối đa */
+    height: 32px; /* Chiều cao logo */
+    object-fit: contain;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+}
+
+.brand-menu-link:hover .brand-menu-logo {
+    transform: scale(1.05);
+}

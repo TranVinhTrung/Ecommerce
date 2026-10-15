@@ -1,0 +1,55 @@
+﻿@model Ecommerce.Web.ViewModels.CategoryMenuViewModel
+
+<ul class="dropdown-menu">
+    @foreach (var category in Model.Categories)
+    {
+        var brands = Model.Brands
+            .Where(b => b.CategoryIds.Contains(category.Id))
+            .ToList();
+
+    <li class="nav-item dropdown">
+        <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret d-flex align-items-center justify-content-between"
+           href="javascript:;"
+           data-bs-toggle="dropdown">
+            <span>@category.Name</span>
+            <span><i class="bi bi-chevron-right"></i></span>
+        </a>
+
+        <ul class="dropdown-menu submenu">
+            @if (brands.Any())
+            {
+                @foreach (var brand in brands)
+                {
+                    <li class="brand-menu-item">
+                        <a class="dropdown-item brand-menu-link"
+                           href="#"
+                           title="@brand.Name"
+                           aria-label="@brand.Name">
+                            @if (!string.IsNullOrWhiteSpace(brand.LogoUrl))
+                            {
+                                <img src="@brand.LogoUrl"
+                                     alt="@brand.Name"
+                                     class="brand-menu-logo"
+                                     loading="lazy" />
+                            }
+                            else
+                            {
+                                <span>@brand.Name</span>
+                            }
+                        </a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li>
+                    <span class="dropdown-item-text text-muted">
+                        Chưa có thương hiệu
+                    </span>
+                </li>
+            }
+        </ul>
+    </li>
+}
+
+</ul>
