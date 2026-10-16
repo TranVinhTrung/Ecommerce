@@ -32,8 +32,22 @@ namespace Ecommerce.Infrastructure.Repositories
 
         public async Task<Brand> AddAsync(Brand brand)
         {
+            var incomingCategories = brand.Categories.ToList();
+
+            brand.Categories.Clear();
+
+            foreach (var category in incomingCategories)
+            {
+                var existingCategory = await _context.Categories
+                    .FindAsync(category.Id);
+
+                if (existingCategory != null)
+                    brand.Categories.Add(existingCategory);
+            }
+
             _context.Brands.Add(brand);
             await _context.SaveChangesAsync();
+
             return brand;
         }
 

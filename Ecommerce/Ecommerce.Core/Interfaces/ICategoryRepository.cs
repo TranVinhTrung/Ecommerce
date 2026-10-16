@@ -10,6 +10,7 @@ namespace Ecommerce.Core.Interfaces
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> GetAllAsync();
+        Task<IEnumerable<Category>> GetParentCategoriesAsync();
 
         Task<Category?> GetByIdAsync(int id);
 

@@ -6,6 +6,7 @@ namespace Ecommerce.Web.ViewModels
     {
         public IEnumerable<CategoryResponseDto> Categories { get; set; } = Enumerable.Empty<CategoryResponseDto>();
         public IEnumerable<BrandResponseDto> Brands { get; set; } = Enumerable.Empty<BrandResponseDto>();
+        public Dictionary<int, List<BrandResponseDto>> BrandsByCategory { get; set; } = new();
     }
 }
 

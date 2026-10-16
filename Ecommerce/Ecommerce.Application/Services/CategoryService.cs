@@ -36,6 +36,21 @@ namespace Ecommerce.Application.Services
             });
         }
 
+        public async Task<IEnumerable<CategoryResponseDto>> GetParentCategoriesAsync()
+        {
+            var categories = await _repository.GetParentCategoriesAsync();
+
+            return categories.Select(category => new CategoryResponseDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                ParentCategoryId = category.ParentCategoryId,
+                CreatedAt = category.CreatedAt,
+                UpdatedAt = category.UpdatedAt
+            });
+        }
+
         public async Task<CategoryResponseDto?> GetByIdAsync(int id)
         {
             var category = await _repository.GetByIdAsync(id);

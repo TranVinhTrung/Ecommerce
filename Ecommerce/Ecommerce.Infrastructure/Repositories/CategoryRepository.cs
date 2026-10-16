@@ -77,6 +77,12 @@ namespace Ecommerce.Infrastructure.Repositories
             return await _context.Categories.AnyAsync(c => c.Id == id);
         }
 
+        public async Task<IEnumerable<Category>> GetParentCategoriesAsync()
+        {
+            return await _context.Categories
+                .Where(c => c.ParentCategoryId == null)
+                .ToListAsync();
+        }
         
     }
 }
