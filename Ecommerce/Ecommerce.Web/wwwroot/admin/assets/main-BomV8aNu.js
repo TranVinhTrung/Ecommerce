@@ -1,7 +1,1840 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./forms-BkV8J-oP.js","./vendor-ui-Be8JR3ju.js","./rolldown-runtime-hePW80VL.js","./password-strength-CR79XtXF.js","./users-D-c5iPiQ.js","./vendor-bootstrap-Dj44xPS1.js","./search-component-7FwxNuMO.js","./analytics-DLyF_OpZ.js","./products-lQumS_mP.js","./orders-DrJPyqPi.js","./reports-BtzS_qVO.js","./vendor-charts-D2Sbi086.js","./messages-CsOe5iDw.js","./calendar-BrA-RY5Z.js","./settings-C3b0BAup.js","./security-CXakDHRf.js","./files-DdZHtETI.js","./help-BQKISPnM.js","./elements-BprsDvyJ.js"])))=>i.map(i=>d[i]);
-import{r as e}from"./rolldown-runtime-hePW80VL.js";import{t}from"./main-BRpeuKCG.js";import{n,t as r}from"./vendor-ui-Be8JR3ju.js";import{a as i,i as a,n as o,o as s,r as c,t as l}from"./vendor-bootstrap-Dj44xPS1.js";import{_ as u,a as d,c as f,d as p,f as m,g as h,h as g,i as _,l as ee,m as te,n as ne,o as re,p as v,r as y,s as b,t as x,u as S,v as C}from"./vendor-charts-D2Sbi086.js";b.register(ee,_,f,v,te,S,m,d,y,re,p,g,h,u,C,x,ne);function w(e,t){return getComputedStyle(document.documentElement).getPropertyValue(e).trim()||t}function T(e,t){let n=/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(e);if(!n)return e;let r=n[1];r.length===3&&(r=[...r].map(e=>e+e).join(``));let i=parseInt(r,16);return`rgba(${i>>16&255}, ${i>>8&255}, ${i&255}, ${t})`}function E(){let e=b.defaults,t=w(`--ink-muted`,`#71717a`),n=w(`--ink-secondary`,`#52525b`),r=w(`--ink-primary`,`#18181b`),i=w(`--bs-border-color`,`#e4e4e7`),a=w(`--surface-panel`,`#ffffff`);e.font.family=getComputedStyle(document.body).fontFamily||w(`--bs-body-font-family`,`sans-serif`),e.font.size=12,e.color=t,e.borderColor=i,e.responsive=!0,e.maintainAspectRatio=!1,e.animation.duration=500,e.elements.line.tension=.4,e.elements.line.borderWidth=2,e.elements.line.borderCapStyle=`round`,e.elements.point.radius=0,e.elements.point.hoverRadius=5,e.elements.point.hitRadius=10,e.elements.point.hoverBorderWidth=2,e.elements.point.pointStyle=`circle`,e.elements.bar.borderRadius=6,e.datasets.bar.maxBarThickness=48,e.elements.arc.borderWidth=2,e.elements.arc.borderColor=a,e.scale.grid.color=i,e.scale.grid.drawTicks=!1,e.scale.border.display=!1,e.scale.border.dash=[4,4],e.scale.ticks.padding=8,e.scale.ticks.color=t;let o=e.plugins.legend;o.labels.usePointStyle=!0,o.labels.pointStyle=`circle`,o.labels.boxWidth=8,o.labels.boxHeight=8,o.labels.padding=16,o.labels.color=n;let s=e.plugins.tooltip;s.backgroundColor=a,s.borderColor=i,s.borderWidth=1,s.cornerRadius=8,s.padding={x:12,y:10},s.caretSize=5,s.titleColor=r,s.titleFont={weight:`600`},s.titleMarginBottom=6,s.bodyColor=n,s.bodySpacing=4,s.boxPadding=6,s.boxWidth=8,s.boxHeight=8,s.usePointStyle=!0}E(),new MutationObserver(()=>{E(),Object.values(b.instances).forEach(e=>e.update(`none`))}).observe(document.documentElement,{attributes:!0,attributeFilter:[`data-bs-theme`]});function D(e,t,{height:n=300,responsiveHeight:r=[],label:i}={}){if(!e)return null;ie(e);let a=document.createElement(`div`);a.className=`chart-canvas-wrap`;let o=document.createElement(`canvas`);o.setAttribute(`role`,`img`);let s=i||e.getAttribute(`aria-label`)||e.closest(`.card`)?.querySelector(`.card-title`)?.textContent?.trim();s&&o.setAttribute(`aria-label`,s),a.appendChild(o),e.replaceChildren(a);let c=()=>{let e=n;for(let[t,n]of r)window.matchMedia(`(max-width: ${t-.02}px)`).matches&&(e=n);a.style.height=`${e}px`};c();let l=new b(o,t);if(r.length){let e=()=>c();window.addEventListener(`resize`,e);let t=l.destroy.bind(l);l.destroy=()=>{window.removeEventListener(`resize`,e),t()}}return l}function ie(e){let t=e?.querySelector(`canvas`);t&&b.getChart(t)?.destroy()}function O(e,t=.3,n=.02){return({chart:r})=>{let i=e(),a=r.chartArea;if(!a)return T(i,t);let o=r.ctx.createLinearGradient(0,a.top,0,a.bottom);return o.addColorStop(0,T(i,t)),o.addColorStop(1,T(i,n)),o}}function k({horizontal:e=!1,stacked:t=!1,format:n,title:r,categoryTitle:i,beginAtZero:a=!0}={}){let o={stacked:t,grid:{display:!1},ticks:{maxRotation:0,autoSkipPadding:12},...i&&{title:{display:!0,text:i}}},s={stacked:t,beginAtZero:a,...!a&&{grace:`10%`},grid:{display:!0},ticks:{maxTicksLimit:6,...n&&{callback:e=>n(e)}},...r&&{title:{display:!0,text:r}}};return e?{x:s,y:o}:{x:o,y:s}}var ae={animation:!1,layout:{padding:2},scales:{x:{display:!1},y:{display:!1,grace:`10%`}},plugins:{legend:{display:!1},tooltip:{enabled:!1}},elements:{point:{radius:0,hoverRadius:0}}},oe={id:`centerText`,afterDatasetsDraw(e,t,n){let r=e.getDatasetMeta(0)?.data?.[0];if(!r||!n?.value)return;let{ctx:i}=e,{x:a,y:o}=r,s=b.defaults.font.family,c=typeof n.value==`function`?n.value(e):n.value;i.save(),i.textAlign=`center`,i.textBaseline=`middle`,n.label&&(i.font=`500 12px ${s}`,i.fillStyle=w(`--ink-muted`,`#71717a`),i.fillText(n.label,a,o-16)),i.font=`600 28px ${s}`,i.fillStyle=w(`--ink-primary`,`#18181b`),i.fillText(c,a,n.label?o+10:o),i.restore()}},A={id:`barValues`,afterDatasetsDraw(e,t,n){let{ctx:r}=e,i=e.options.indexAxis===`y`,a=n?.format||(e=>Number(e).toLocaleString());r.save(),r.font=`600 11px ${b.defaults.font.family}`,e.data.datasets.forEach((t,o)=>{let s=e.getDatasetMeta(o);s.hidden||s.data.forEach((e,s)=>{let c=a(t.data[s]),l=r.measureText(c).width,{x:u,y:d,base:f}=e.getProps([`x`,`y`,`base`],!0),p=Math.abs((i?u:d)-f)>(i?l+12:20),m=typeof n?.color==`function`?n.color(o):n?.color;r.fillStyle=p?m||`#ffffff`:b.defaults.color,r.textBaseline=`middle`,i?(r.textAlign=p?`right`:`left`,r.fillText(c,p?u-8:u+6,d)):(r.textAlign=`center`,r.fillText(c,u,p?d+10:d-8))})}),r.restore()}},j={id:`sliceLabels`,afterDatasetsDraw(e,t,n){let{ctx:r}=e,i=e.getDatasetMeta(0),a=e.data.datasets[0]?.data||[],o=a.reduce((e,t)=>e+(Number(t)||0),0);o&&(r.save(),r.font=`600 11px ${b.defaults.font.family}`,r.textAlign=`center`,r.textBaseline=`middle`,r.fillStyle=n?.color||`#ffffff`,i.data.forEach((t,i)=>{let s=a[i]/o*100;if(!e.getDataVisibility(i)||s<(n?.min??5))return;let{x:c,y:l}=t.tooltipPosition();r.fillText(`${s.toFixed(1)}%`,c,l)}),r.restore())}},M=[`#2563eb`,`#0d9488`,`#d97706`,`#7c3aed`,`#db2777`,`#0891b2`],N=[`#3b82f6`,`#0d9488`,`#d97706`,`#8b5cf6`,`#ec4899`,`#0891b2`],P=[`#bfdbfe`,`#93c5fd`,`#60a5fa`,`#3b82f6`,`#2563eb`,`#1d4ed8`],F={success:`#16a34a`,warning:`#d97706`,danger:`#dc2626`,info:`#0891b2`,neutral:`#71717a`};function I(){return document.documentElement.getAttribute(`data-bs-theme`)===`dark`}function L(e){let t=I()?N:M;return e?t.slice(0,e):[...t]}function R(){return L(1)[0]}function z(){return I()?`#a1a1aa`:`#71717a`}function B(){return I()?`#27272a`:`#e4e4e7`}function V(){return I()?`#27272a`:`#e4e4e7`}function H(){return I()?`#18181b`:`#ffffff`}function U(){return`#ffffff`}var W=1e3,G=3e4,K=1e4,se=15e3,ce=1e3,le=class{constructor(){this.charts=new Map,this.intervals=new Set,this.timeouts=new Set,this.cleanupFns=[],this.currentPeriod={count:12,unit:`month`},this.data={revenue:[],users:[],orders:[],performance:[],recentOrders:[],salesByLocation:[]},this.init()}async init(){await this.loadDashboardData(),this.initRevenueChart(),this.initUserGrowthChart(),this.initOrderStatusChart(),this.initStorageChart(),this.initSalesByLocationChart(),this.populateRecentOrders(),this.startRealTimeUpdates(),this.initInteractiveElements()}async loadDashboardData(){this.data.revenue=this.generateRevenueData(),this.data.users=this.generateUserData(),this.data.orders=this.generateOrderData(),this.data.performance=this.generatePerformanceData(),this.data.recentOrders=this.generateRecentOrders(),this.data.salesByLocation=this.generateSalesByLocation()}generateRevenueData(){return[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`].map(e=>({month:e,revenue:Math.floor(Math.random()*5e4)+1e4,profit:Math.floor(Math.random()*2e4)+5e3}))}generateUserData(){return Array.from({length:30},(e,t)=>t+1).map(e=>({day:e,newUsers:Math.floor(Math.random()*100)+20,activeUsers:Math.floor(Math.random()*500)+200}))}generateOrderData(){return{completed:1245,pending:87,cancelled:23,processing:156}}generateRecentOrders(){let e=[`John Doe`,`Jane Smith`,`Mike Johnson`,`Sarah Wilson`,`Bob Brown`],t=[{text:`Completed`,class:`bg-success`},{text:`Pending`,class:`bg-warning`},{text:`Shipped`,class:`bg-info`},{text:`Cancelled`,class:`bg-danger`}];return Array.from({length:5},()=>({id:`#${Math.floor(Math.random()*9e3)+1e3}`,customer:e[Math.floor(Math.random()*e.length)],amount:`$${(Math.random()*500+50).toFixed(2)}`,status:t[Math.floor(Math.random()*t.length)],date:new Date(Date.now()-Math.random()*1e3*60*60*24*7).toLocaleDateString()}))}generateSalesByLocation(){return[{name:`United States`,value:2822},{name:`Canada`,value:1432},{name:`United Kingdom`,value:980},{name:`Australia`,value:780},{name:`Germany`,value:650},{name:`Brazil`,value:450},{name:`India`,value:1800},{name:`China`,value:2100},{name:`Japan`,value:850},{name:`Russia`,value:550}]}generatePerformanceData(){return Array.from({length:24},(e,t)=>t).map(e=>({hour:`${e.toString().padStart(2,`0`)}:00`,responseTime:Math.random()*2+.5,requests:Math.floor(Math.random()*1e3)+100}))}initRevenueChart(){let e=document.getElementById(`revenueChart`);if(!e)return;let t=e=>`$`+Number(e).toLocaleString(),n=D(e,{type:`line`,data:{labels:this.data.revenue.map(e=>e.month),datasets:[{label:`Revenue`,data:this.data.revenue.map(e=>e.revenue),borderColor:()=>L(2)[0],backgroundColor:O(()=>L(2)[0]),pointBackgroundColor:()=>L(2)[0],fill:!0},{label:`Profit`,data:this.data.revenue.map(e=>e.profit),borderColor:()=>L(2)[1],backgroundColor:O(()=>L(2)[1]),pointBackgroundColor:()=>L(2)[1],fill:!0}]},options:{interaction:{mode:`index`,intersect:!1},scales:k({format:t}),plugins:{legend:{position:`top`},tooltip:{callbacks:{label:e=>`${e.dataset.label}: ${t(e.parsed.y)}`}}}}},{height:320});this.charts.set(`revenue`,n)}initUserGrowthChart(){let e=document.getElementById(`userGrowthChart`);if(!e)return;let t=this.data.users.slice(-7),n=D(e,{type:`bar`,data:{labels:t.map(e=>`Day ${e.day}`),datasets:[{label:`New Users`,data:t.map(e=>e.newUsers),backgroundColor:()=>R(),categoryPercentage:.6}]},options:{scales:k(),plugins:{legend:{display:!1}}}},{height:280});this.charts.set(`userGrowth`,n)}initOrderStatusChart(){let e=document.getElementById(`orderStatusChart`);if(!e)return;let t=[F.success,F.info,F.warning,F.danger],n=D(e,{type:`doughnut`,data:{labels:[`Completed`,`Processing`,`Pending`,`Cancelled`],datasets:[{data:[this.data.orders.completed,this.data.orders.processing,this.data.orders.pending,this.data.orders.cancelled],backgroundColor:t}]},options:{cutout:`60%`,plugins:{legend:{position:`bottom`}}}},{height:280});this.charts.set(`orderStatus`,n)}initStorageChart(){let e=document.querySelector(`#storageStatusChart`);if(!e)return;let t=D(e,{type:`doughnut`,data:{labels:[`Used Space`,`Free Space`],datasets:[{data:[76,24],backgroundColor:e=>e.dataIndex===0?R():V(),hoverBackgroundColor:e=>e.dataIndex===0?R():V(),borderWidth:0,borderRadius:[{outerStart:12,outerEnd:12,innerStart:12,innerEnd:12},0]}]},options:{cutout:`78%`,layout:{padding:24},plugins:{legend:{display:!1},tooltip:{callbacks:{label:e=>`${e.label}: ${e.parsed}%`}},centerText:{label:`Used Space`,value:`76%`}}},plugins:[oe]},{height:280});this.charts.set(`storage`,t)}initSalesByLocationChart(){let e=document.querySelector(`#salesByLocationChart`);if(!e)return;let t=e=>e>2e3?P[5]:e>1e3?P[3]:P[1],n=D(e,{type:`treemap`,data:{datasets:[{label:`Sales`,tree:this.data.salesByLocation,key:`value`,labels:{display:!0,align:`center`,position:`middle`,color:e=>e.raw&&e.raw.v<=1e3?P[5]:U(),font:[{weight:`600`,size:12},{size:12}],formatter:e=>[e.raw._data.name,Number(e.raw.v).toLocaleString()]},backgroundColor:e=>e.type===`data`?t(e.raw.v):`transparent`,borderColor:()=>H(),borderWidth:2,borderRadius:4,spacing:0}]},options:{plugins:{legend:{display:!1},tooltip:{callbacks:{title:e=>e[0]?.raw?._data?.name??``,label:e=>`Sales: ${Number(e.raw.v).toLocaleString()}`}}}}},{height:350,responsiveHeight:[[768,300]]});this.charts.set(`salesByLocation`,n)}populateRecentOrders(){let e=document.getElementById(`recent-orders-table`);if(e){e.replaceChildren();for(let t of this.data.recentOrders){let n=document.createElement(`tr`),r=document.createElement(`td`),i=document.createElement(`strong`);i.textContent=t.id,r.appendChild(i);let a=document.createElement(`td`);a.textContent=t.customer;let o=document.createElement(`td`);o.textContent=t.amount;let s=document.createElement(`td`),c=document.createElement(`span`);c.className=`badge ${t.status.class}`,c.textContent=t.status.text,s.appendChild(c);let l=document.createElement(`td`);l.textContent=t.date,n.append(r,a,o,s,l),e.appendChild(n)}}}startRealTimeUpdates(){let e=setInterval(()=>this.updateChartsWithRealTimeData(),G);this.intervals.add(e)}updateChartsWithRealTimeData(){let e=this.charts.get(`revenue`);if(e){let{count:t,unit:n}=this.currentPeriod,r=this.buildPeriodLabels(t,n),i=r[r.length-1];for(this.data.revenue.push({month:i,revenue:Math.floor(Math.random()*5e4)+1e4,profit:Math.floor(Math.random()*2e4)+5e3});this.data.revenue.length>t;)this.data.revenue.shift();this.data.revenue.forEach((e,t)=>{e.month=r[t]}),this.setRevenueData(e)}this.updateStatsCards()}updateStatsCards(){document.querySelectorAll(`[data-stat-value]`).forEach(e=>{let t=parseInt(e.textContent.replace(/[^0-9]/g,``)),n=t+Math.floor(Math.random()*10)-5;n>0&&this.animateNumber(e,t,n)})}animateNumber(e,t,n){let r=(n-t)/30,i=t,a=0,o=setInterval(()=>{i+=r,a++;let t=Math.floor(i).toLocaleString();e.textContent=e.textContent.replace(/[\d,]+/,t),a>=30&&(clearInterval(o),this.intervals.delete(o),e.textContent=e.textContent.replace(/[\d,]+/,n.toLocaleString()))},ce/30);this.intervals.add(o)}initInteractiveElements(){let e=e=>{if(e.target.matches(`[data-chart-period]`)){let t=e.target.dataset.chartPeriod;this.updateChartPeriod(t),document.querySelectorAll(`[data-chart-period]`).forEach(e=>e.classList.remove(`active`)),e.target.classList.add(`active`)}},t=e=>{if(e.target.matches(`[data-export-chart]`)){let t=e.target.dataset.exportChart;this.exportChart(t)}};document.addEventListener(`click`,e),document.addEventListener(`click`,t),this.cleanupFns.push(()=>document.removeEventListener(`click`,e)),this.cleanupFns.push(()=>document.removeEventListener(`click`,t))}updateChartPeriod(e){let t={"7d":{count:7,unit:`day`},"30d":{count:30,unit:`day`},"90d":{count:90,unit:`day`},"1y":{count:12,unit:`month`}}[e];if(!t)return;this.currentPeriod=t;let{count:n,unit:r}=t,i=this.buildPeriodLabels(n,r);this.data.revenue=i.map(e=>({month:e,revenue:Math.floor(Math.random()*5e4)+1e4,profit:Math.floor(Math.random()*2e4)+5e3}));let a=this.charts.get(`revenue`);a&&this.setRevenueData(a)}setRevenueData(e){e.data.labels=this.data.revenue.map(e=>e.month),e.data.datasets[0].data=this.data.revenue.map(e=>e.revenue),e.data.datasets[1].data=this.data.revenue.map(e=>e.profit),e.update()}buildPeriodLabels(e,t){let n=new Date;if(t===`day`)return Array.from({length:e},(t,r)=>{let i=new Date(n);return i.setDate(i.getDate()-(e-1-r)),i.toLocaleDateString(`en-US`,{month:`short`,day:`numeric`})});let r=[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`];return Array.from({length:e},(t,i)=>{let a=new Date(n.getFullYear(),n.getMonth()-(e-1-i),1);return r[a.getMonth()]})}exportChart(e){let t=this.charts.get(e);if(!t)return;let n=document.createElement(`a`);n.download=`${e}-chart.png`,n.href=t.toBase64Image(),n.click()}destroy(){this.intervals.forEach(e=>clearInterval(e)),this.intervals.clear(),this.timeouts.forEach(e=>clearTimeout(e)),this.timeouts.clear(),this.cleanupFns.forEach(e=>e()),this.cleanupFns=[],this.charts.forEach(e=>e.destroy()),this.charts.clear()}},q=e(r(),1),ue=class{constructor(){this.container=document.getElementById(`toast-container`)||this.createToastContainer(),this.defaultDuration=5e3,this.activeToasts=new Set,this.init()}init(){this.container||(this.container=this.createToastContainer()),this.configureSweetAlert()}createToastContainer(){let e=document.createElement(`div`);return e.id=`toast-container`,e.className=`position-fixed top-0 end-0 p-3`,e.style.zIndex=`11`,e.setAttribute(`aria-live`,`polite`),e.setAttribute(`aria-atomic`,`true`),document.body.appendChild(e),e}configureSweetAlert(){q.default.mixin({customClass:{confirmButton:`btn btn-primary me-2`,cancelButton:`btn btn-secondary`,popup:`rounded-3 shadow-lg`,title:`fs-4 fw-bold`,content:`text-muted`},buttonsStyling:!1,reverseButtons:!0,focusConfirm:!1,allowOutsideClick:!0,allowEscapeKey:!0,showCloseButton:!0})}show(e,t=`info`,n={}){let r={message:e,type:t,duration:n.duration||this.defaultDuration,persistent:n.persistent||!1,action:n.action||null,icon:n.icon||this.getIconForType(t)},a=this.createToast(r);this.container.appendChild(a);let o=new i(a,{autohide:!r.persistent,delay:r.duration});return this.activeToasts.add(o),a.addEventListener(`hidden.bs.toast`,()=>{this.activeToasts.delete(o),a.remove()}),o.show(),o}createToast(e){let t=`toast-${Date.now()}-${Math.random().toString(36).slice(2,11)}`,n=document.createElement(`div`);n.className=`toast align-items-center text-bg-${this._sanitizeType(e.type)} border-0`,n.id=t,n.role=`alert`,n.setAttribute(`aria-live`,`assertive`),n.setAttribute(`aria-atomic`,`true`);let r=document.createElement(`div`);r.className=`d-flex`;let i=document.createElement(`div`);i.className=`toast-body d-flex align-items-center`;let a=document.createElement(`i`);a.className=`${this._sanitizeIconClass(e.icon)} me-2`,i.appendChild(a);let o=document.createElement(`span`);if(o.className=`flex-grow-1`,o.textContent=e.message,i.appendChild(o),e.action&&typeof e.action.handler==`function`){let t=document.createElement(`button`);t.type=`button`,t.className=`btn btn-sm btn-outline-light me-2`,t.textContent=e.action.text||`Action`,t.addEventListener(`click`,e.action.handler),i.appendChild(t)}if(r.appendChild(i),!e.persistent){let e=document.createElement(`button`);e.type=`button`,e.className=`btn-close btn-close-white me-2 m-auto`,e.setAttribute(`data-bs-dismiss`,`toast`),e.setAttribute(`aria-label`,`Close`),r.appendChild(e)}return n.appendChild(r),n}_sanitizeType(e){return[`primary`,`secondary`,`success`,`danger`,`warning`,`info`,`light`,`dark`,`error`].includes(e)?e:`info`}_sanitizeIconClass(e){return typeof e==`string`&&/^[\w\s-]+$/.test(e)?e:`bi bi-info-circle-fill`}getIconForType(e){let t={success:`bi bi-check-circle-fill`,error:`bi bi-exclamation-triangle-fill`,warning:`bi bi-exclamation-triangle-fill`,info:`bi bi-info-circle-fill`,primary:`bi bi-info-circle-fill`,secondary:`bi bi-info-circle-fill`,danger:`bi bi-exclamation-triangle-fill`,light:`bi bi-info-circle-fill`,dark:`bi bi-info-circle-fill`};return t[e]||t.info}success(e,t={}){return this.show(e,`success`,t)}error(e,t={}){return this.show(e,`danger`,t)}warning(e,t={}){return this.show(e,`warning`,t)}info(e,t={}){return this.show(e,`info`,t)}async confirm(e={}){return(await q.default.fire({title:`Are you sure?`,text:`This action cannot be undone.`,icon:`warning`,showCancelButton:!0,confirmButtonText:`Yes, proceed`,cancelButtonText:`Cancel`,...e})).isConfirmed}async prompt(e={}){let t=await q.default.fire({title:`Enter value`,input:`text`,showCancelButton:!0,confirmButtonText:`Submit`,cancelButtonText:`Cancel`,inputValidator:e=>{if(!e)return`Please enter a value`},...e});return t.isConfirmed?t.value:null}async alert(e,t=`info`,n=``){await q.default.fire({title:n,text:e,icon:{success:`success`,error:`error`,warning:`warning`,info:`info`}[t]||`info`,confirmButtonText:`OK`})}async showLoading(e=`Loading...`){q.default.fire({title:e,allowOutsideClick:!1,allowEscapeKey:!1,showConfirmButton:!1,willOpen:()=>{q.default.showLoading()}})}hideLoading(){q.default.close()}async showProgress(e,t){await q.default.fire({title:e,html:`
+const __vite__mapDeps = (
+    i,
+    m = __vite__mapDeps,
+    d = m.f ||
+        (m.f = [
+            "./forms-BkV8J-oP.js",
+            "./vendor-ui-Be8JR3ju.js",
+            "./rolldown-runtime-hePW80VL.js",
+            "./password-strength-CR79XtXF.js",
+            "./users-D-c5iPiQ.js",
+            "./vendor-bootstrap-Dj44xPS1.js",
+            "./search-component-7FwxNuMO.js",
+            "./analytics-DLyF_OpZ.js",
+            "./products-lQumS_mP.js",
+            "./orders-DrJPyqPi.js",
+            "./reports-BtzS_qVO.js",
+            "./vendor-charts-D2Sbi086.js",
+            "./messages-CsOe5iDw.js",
+            "./calendar-BrA-RY5Z.js",
+            "./settings-C3b0BAup.js",
+            "./security-CXakDHRf.js",
+            "./files-DdZHtETI.js",
+            "./help-BQKISPnM.js",
+            "./elements-BprsDvyJ.js",
+        ]),
+) => i.map((i) => d[i]);
+import { r as e } from "./rolldown-runtime-hePW80VL.js";
+import { t } from "./main-BRpeuKCG.js";
+import { n, t as r } from "./vendor-ui-Be8JR3ju.js";
+import {
+    a as i,
+    i as a,
+    n as o,
+    o as s,
+    r as c,
+    t as l,
+} from "./vendor-bootstrap-Dj44xPS1.js";
+import {
+    _ as u,
+    a as d,
+    c as f,
+    d as p,
+    f as m,
+    g as h,
+    h as g,
+    i as _,
+    l as ee,
+    m as te,
+    n as ne,
+    o as re,
+    p as v,
+    r as y,
+    s as b,
+    t as x,
+    u as S,
+    v as C,
+} from "./vendor-charts-D2Sbi086.js";
+b.register(ee, _, f, v, te, S, m, d, y, re, p, g, h, u, C, x, ne);
+function w(e, t) {
+    return (
+        getComputedStyle(document.documentElement).getPropertyValue(e).trim() || t
+    );
+}
+function T(e, t) {
+    let n = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(e);
+    if (!n) return e;
+    let r = n[1];
+    r.length === 3 && (r = [...r].map((e) => e + e).join(``));
+    let i = parseInt(r, 16);
+    return `rgba(${(i >> 16) & 255}, ${(i >> 8) & 255}, ${i & 255}, ${t})`;
+}
+function E() {
+    let e = b.defaults,
+        t = w(`--ink-muted`, `#71717a`),
+        n = w(`--ink-secondary`, `#52525b`),
+        r = w(`--ink-primary`, `#18181b`),
+        i = w(`--bs-border-color`, `#e4e4e7`),
+        a = w(`--surface-panel`, `#ffffff`);
+    ((e.font.family =
+        getComputedStyle(document.body).fontFamily ||
+        w(`--bs-body-font-family`, `sans-serif`)),
+        (e.font.size = 12),
+        (e.color = t),
+        (e.borderColor = i),
+        (e.responsive = !0),
+        (e.maintainAspectRatio = !1),
+        (e.animation.duration = 500),
+        (e.elements.line.tension = 0.4),
+        (e.elements.line.borderWidth = 2),
+        (e.elements.line.borderCapStyle = `round`),
+        (e.elements.point.radius = 0),
+        (e.elements.point.hoverRadius = 5),
+        (e.elements.point.hitRadius = 10),
+        (e.elements.point.hoverBorderWidth = 2),
+        (e.elements.point.pointStyle = `circle`),
+        (e.elements.bar.borderRadius = 6),
+        (e.datasets.bar.maxBarThickness = 48),
+        (e.elements.arc.borderWidth = 2),
+        (e.elements.arc.borderColor = a),
+        (e.scale.grid.color = i),
+        (e.scale.grid.drawTicks = !1),
+        (e.scale.border.display = !1),
+        (e.scale.border.dash = [4, 4]),
+        (e.scale.ticks.padding = 8),
+        (e.scale.ticks.color = t));
+    let o = e.plugins.legend;
+    ((o.labels.usePointStyle = !0),
+        (o.labels.pointStyle = `circle`),
+        (o.labels.boxWidth = 8),
+        (o.labels.boxHeight = 8),
+        (o.labels.padding = 16),
+        (o.labels.color = n));
+    let s = e.plugins.tooltip;
+    ((s.backgroundColor = a),
+        (s.borderColor = i),
+        (s.borderWidth = 1),
+        (s.cornerRadius = 8),
+        (s.padding = { x: 12, y: 10 }),
+        (s.caretSize = 5),
+        (s.titleColor = r),
+        (s.titleFont = { weight: `600` }),
+        (s.titleMarginBottom = 6),
+        (s.bodyColor = n),
+        (s.bodySpacing = 4),
+        (s.boxPadding = 6),
+        (s.boxWidth = 8),
+        (s.boxHeight = 8),
+        (s.usePointStyle = !0));
+}
+(E(),
+    new MutationObserver(() => {
+        (E(), Object.values(b.instances).forEach((e) => e.update(`none`)));
+    }).observe(document.documentElement, {
+        attributes: !0,
+        attributeFilter: [`data-bs-theme`],
+    }));
+function D(e, t, { height: n = 300, responsiveHeight: r = [], label: i } = {}) {
+    if (!e) return null;
+    ie(e);
+    let a = document.createElement(`div`);
+    a.className = `chart-canvas-wrap`;
+    let o = document.createElement(`canvas`);
+    o.setAttribute(`role`, `img`);
+    let s =
+        i ||
+        e.getAttribute(`aria-label`) ||
+        e.closest(`.card`)?.querySelector(`.card-title`)?.textContent?.trim();
+    (s && o.setAttribute(`aria-label`, s),
+        a.appendChild(o),
+        e.replaceChildren(a));
+    let c = () => {
+        let e = n;
+        for (let [t, n] of r)
+            window.matchMedia(`(max-width: ${t - 0.02}px)`).matches && (e = n);
+        a.style.height = `${e}px`;
+    };
+    c();
+    let l = new b(o, t);
+    if (r.length) {
+        let e = () => c();
+        window.addEventListener(`resize`, e);
+        let t = l.destroy.bind(l);
+        l.destroy = () => {
+            (window.removeEventListener(`resize`, e), t());
+        };
+    }
+    return l;
+}
+function ie(e) {
+    let t = e?.querySelector(`canvas`);
+    t && b.getChart(t)?.destroy();
+}
+function O(e, t = 0.3, n = 0.02) {
+    return ({ chart: r }) => {
+        let i = e(),
+            a = r.chartArea;
+        if (!a) return T(i, t);
+        let o = r.ctx.createLinearGradient(0, a.top, 0, a.bottom);
+        return (o.addColorStop(0, T(i, t)), o.addColorStop(1, T(i, n)), o);
+    };
+}
+function k({
+    horizontal: e = !1,
+    stacked: t = !1,
+    format: n,
+    title: r,
+    categoryTitle: i,
+    beginAtZero: a = !0,
+} = {}) {
+    let o = {
+        stacked: t,
+        grid: { display: !1 },
+        ticks: { maxRotation: 0, autoSkipPadding: 12 },
+        ...(i && { title: { display: !0, text: i } }),
+    },
+        s = {
+            stacked: t,
+            beginAtZero: a,
+            ...(!a && { grace: `10%` }),
+            grid: { display: !0 },
+            ticks: { maxTicksLimit: 6, ...(n && { callback: (e) => n(e) }) },
+            ...(r && { title: { display: !0, text: r } }),
+        };
+    return e ? { x: s, y: o } : { x: o, y: s };
+}
+var ae = {
+    animation: !1,
+    layout: { padding: 2 },
+    scales: { x: { display: !1 }, y: { display: !1, grace: `10%` } },
+    plugins: { legend: { display: !1 }, tooltip: { enabled: !1 } },
+    elements: { point: { radius: 0, hoverRadius: 0 } },
+},
+    oe = {
+        id: `centerText`,
+        afterDatasetsDraw(e, t, n) {
+            let r = e.getDatasetMeta(0)?.data?.[0];
+            if (!r || !n?.value) return;
+            let { ctx: i } = e,
+                { x: a, y: o } = r,
+                s = b.defaults.font.family,
+                c = typeof n.value == `function` ? n.value(e) : n.value;
+            (i.save(),
+                (i.textAlign = `center`),
+                (i.textBaseline = `middle`),
+                n.label &&
+                ((i.font = `500 12px ${s}`),
+                    (i.fillStyle = w(`--ink-muted`, `#71717a`)),
+                    i.fillText(n.label, a, o - 16)),
+                (i.font = `600 28px ${s}`),
+                (i.fillStyle = w(`--ink-primary`, `#18181b`)),
+                i.fillText(c, a, n.label ? o + 10 : o),
+                i.restore());
+        },
+    },
+    A = {
+        id: `barValues`,
+        afterDatasetsDraw(e, t, n) {
+            let { ctx: r } = e,
+                i = e.options.indexAxis === `y`,
+                a = n?.format || ((e) => Number(e).toLocaleString());
+            (r.save(),
+                (r.font = `600 11px ${b.defaults.font.family}`),
+                e.data.datasets.forEach((t, o) => {
+                    let s = e.getDatasetMeta(o);
+                    s.hidden ||
+                        s.data.forEach((e, s) => {
+                            let c = a(t.data[s]),
+                                l = r.measureText(c).width,
+                                { x: u, y: d, base: f } = e.getProps([`x`, `y`, `base`], !0),
+                                p = Math.abs((i ? u : d) - f) > (i ? l + 12 : 20),
+                                m = typeof n?.color == `function` ? n.color(o) : n?.color;
+                            ((r.fillStyle = p ? m || `#ffffff` : b.defaults.color),
+                                (r.textBaseline = `middle`),
+                                i
+                                    ? ((r.textAlign = p ? `right` : `left`),
+                                        r.fillText(c, p ? u - 8 : u + 6, d))
+                                    : ((r.textAlign = `center`),
+                                        r.fillText(c, u, p ? d + 10 : d - 8)));
+                        });
+                }),
+                r.restore());
+        },
+    },
+    j = {
+        id: `sliceLabels`,
+        afterDatasetsDraw(e, t, n) {
+            let { ctx: r } = e,
+                i = e.getDatasetMeta(0),
+                a = e.data.datasets[0]?.data || [],
+                o = a.reduce((e, t) => e + (Number(t) || 0), 0);
+            o &&
+                (r.save(),
+                    (r.font = `600 11px ${b.defaults.font.family}`),
+                    (r.textAlign = `center`),
+                    (r.textBaseline = `middle`),
+                    (r.fillStyle = n?.color || `#ffffff`),
+                    i.data.forEach((t, i) => {
+                        let s = (a[i] / o) * 100;
+                        if (!e.getDataVisibility(i) || s < (n?.min ?? 5)) return;
+                        let { x: c, y: l } = t.tooltipPosition();
+                        r.fillText(`${s.toFixed(1)}%`, c, l);
+                    }),
+                    r.restore());
+        },
+    },
+    M = [`#2563eb`, `#0d9488`, `#d97706`, `#7c3aed`, `#db2777`, `#0891b2`],
+    N = [`#3b82f6`, `#0d9488`, `#d97706`, `#8b5cf6`, `#ec4899`, `#0891b2`],
+    P = [`#bfdbfe`, `#93c5fd`, `#60a5fa`, `#3b82f6`, `#2563eb`, `#1d4ed8`],
+    F = {
+        success: `#16a34a`,
+        warning: `#d97706`,
+        danger: `#dc2626`,
+        info: `#0891b2`,
+        neutral: `#71717a`,
+    };
+function I() {
+    return document.documentElement.getAttribute(`data-bs-theme`) === `dark`;
+}
+function L(e) {
+    let t = I() ? N : M;
+    return e ? t.slice(0, e) : [...t];
+}
+function R() {
+    return L(1)[0];
+}
+function z() {
+    return I() ? `#a1a1aa` : `#71717a`;
+}
+function B() {
+    return I() ? `#27272a` : `#e4e4e7`;
+}
+function V() {
+    return I() ? `#27272a` : `#e4e4e7`;
+}
+function H() {
+    return I() ? `#18181b` : `#ffffff`;
+}
+function U() {
+    return `#ffffff`;
+}
+var W = 1e3,
+    G = 3e4,
+    K = 1e4,
+    se = 15e3,
+    ce = 1e3,
+    le = class {
+        constructor() {
+            ((this.charts = new Map()),
+                (this.intervals = new Set()),
+                (this.timeouts = new Set()),
+                (this.cleanupFns = []),
+                (this.currentPeriod = { count: 12, unit: `month` }),
+                (this.data = {
+                    revenue: [],
+                    users: [],
+                    orders: [],
+                    performance: [],
+                    recentOrders: [],
+                    salesByLocation: [],
+                }),
+                this.init());
+        }
+        async init() {
+            (await this.loadDashboardData(),
+                this.initRevenueChart(),
+                this.initUserGrowthChart(),
+                this.initOrderStatusChart(),
+                this.initStorageChart(),
+                this.initSalesByLocationChart(),
+                this.populateRecentOrders(),
+                this.startRealTimeUpdates(),
+                this.initInteractiveElements());
+        }
+        async loadDashboardData() {
+            ((this.data.revenue = this.generateRevenueData()),
+                (this.data.users = this.generateUserData()),
+                (this.data.orders = this.generateOrderData()),
+                (this.data.performance = this.generatePerformanceData()),
+                (this.data.recentOrders = this.generateRecentOrders()),
+                (this.data.salesByLocation = this.generateSalesByLocation()));
+        }
+        generateRevenueData() {
+            return [
+                `Jan`,
+                `Feb`,
+                `Mar`,
+                `Apr`,
+                `May`,
+                `Jun`,
+                `Jul`,
+                `Aug`,
+                `Sep`,
+                `Oct`,
+                `Nov`,
+                `Dec`,
+            ].map((e) => ({
+                month: e,
+                revenue: Math.floor(Math.random() * 5e4) + 1e4,
+                profit: Math.floor(Math.random() * 2e4) + 5e3,
+            }));
+        }
+        generateUserData() {
+            return Array.from({ length: 30 }, (e, t) => t + 1).map((e) => ({
+                day: e,
+                newUsers: Math.floor(Math.random() * 100) + 20,
+                activeUsers: Math.floor(Math.random() * 500) + 200,
+            }));
+        }
+        generateOrderData() {
+            return { completed: 1245, pending: 87, cancelled: 23, processing: 156 };
+        }
+        generateRecentOrders() {
+            let e = [
+                `John Doe`,
+                `Jane Smith`,
+                `Mike Johnson`,
+                `Sarah Wilson`,
+                `Bob Brown`,
+            ],
+                t = [
+                    { text: `Completed`, class: `bg-success` },
+                    { text: `Pending`, class: `bg-warning` },
+                    { text: `Shipped`, class: `bg-info` },
+                    { text: `Cancelled`, class: `bg-danger` },
+                ];
+            return Array.from({ length: 5 }, () => ({
+                id: `#${Math.floor(Math.random() * 9e3) + 1e3}`,
+                customer: e[Math.floor(Math.random() * e.length)],
+                amount: `$${(Math.random() * 500 + 50).toFixed(2)}`,
+                status: t[Math.floor(Math.random() * t.length)],
+                date: new Date(
+                    Date.now() - Math.random() * 1e3 * 60 * 60 * 24 * 7,
+                ).toLocaleDateString(),
+            }));
+        }
+        generateSalesByLocation() {
+            return [
+                { name: `United States`, value: 2822 },
+                { name: `Canada`, value: 1432 },
+                { name: `United Kingdom`, value: 980 },
+                { name: `Australia`, value: 780 },
+                { name: `Germany`, value: 650 },
+                { name: `Brazil`, value: 450 },
+                { name: `India`, value: 1800 },
+                { name: `China`, value: 2100 },
+                { name: `Japan`, value: 850 },
+                { name: `Russia`, value: 550 },
+            ];
+        }
+        generatePerformanceData() {
+            return Array.from({ length: 24 }, (e, t) => t).map((e) => ({
+                hour: `${e.toString().padStart(2, `0`)}:00`,
+                responseTime: Math.random() * 2 + 0.5,
+                requests: Math.floor(Math.random() * 1e3) + 100,
+            }));
+        }
+        initRevenueChart() {
+            let e = document.getElementById(`revenueChart`);
+            if (!e) return;
+            let t = (e) => `$` + Number(e).toLocaleString(),
+                n = D(
+                    e,
+                    {
+                        type: `line`,
+                        data: {
+                            labels: this.data.revenue.map((e) => e.month),
+                            datasets: [
+                                {
+                                    label: `Revenue`,
+                                    data: this.data.revenue.map((e) => e.revenue),
+                                    borderColor: () => L(2)[0],
+                                    backgroundColor: O(() => L(2)[0]),
+                                    pointBackgroundColor: () => L(2)[0],
+                                    fill: !0,
+                                },
+                                {
+                                    label: `Profit`,
+                                    data: this.data.revenue.map((e) => e.profit),
+                                    borderColor: () => L(2)[1],
+                                    backgroundColor: O(() => L(2)[1]),
+                                    pointBackgroundColor: () => L(2)[1],
+                                    fill: !0,
+                                },
+                            ],
+                        },
+                        options: {
+                            interaction: { mode: `index`, intersect: !1 },
+                            scales: k({ format: t }),
+                            plugins: {
+                                legend: { position: `top` },
+                                tooltip: {
+                                    callbacks: {
+                                        label: (e) => `${e.dataset.label}: ${t(e.parsed.y)}`,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                    { height: 320 },
+                );
+            this.charts.set(`revenue`, n);
+        }
+        initUserGrowthChart() {
+            let e = document.getElementById(`userGrowthChart`);
+            if (!e) return;
+            let t = this.data.users.slice(-7),
+                n = D(
+                    e,
+                    {
+                        type: `bar`,
+                        data: {
+                            labels: t.map((e) => `Day ${e.day}`),
+                            datasets: [
+                                {
+                                    label: `New Users`,
+                                    data: t.map((e) => e.newUsers),
+                                    backgroundColor: () => R(),
+                                    categoryPercentage: 0.6,
+                                },
+                            ],
+                        },
+                        options: { scales: k(), plugins: { legend: { display: !1 } } },
+                    },
+                    { height: 280 },
+                );
+            this.charts.set(`userGrowth`, n);
+        }
+        initOrderStatusChart() {
+            let e = document.getElementById(`orderStatusChart`);
+            if (!e) return;
+            let t = [F.success, F.info, F.warning, F.danger],
+                n = D(
+                    e,
+                    {
+                        type: `doughnut`,
+                        data: {
+                            labels: [`Completed`, `Processing`, `Pending`, `Cancelled`],
+                            datasets: [
+                                {
+                                    data: [
+                                        this.data.orders.completed,
+                                        this.data.orders.processing,
+                                        this.data.orders.pending,
+                                        this.data.orders.cancelled,
+                                    ],
+                                    backgroundColor: t,
+                                },
+                            ],
+                        },
+                        options: {
+                            cutout: `60%`,
+                            plugins: { legend: { position: `bottom` } },
+                        },
+                    },
+                    { height: 280 },
+                );
+            this.charts.set(`orderStatus`, n);
+        }
+        initStorageChart() {
+            let e = document.querySelector(`#storageStatusChart`);
+            if (!e) return;
+            let t = D(
+                e,
+                {
+                    type: `doughnut`,
+                    data: {
+                        labels: [`Used Space`, `Free Space`],
+                        datasets: [
+                            {
+                                data: [76, 24],
+                                backgroundColor: (e) => (e.dataIndex === 0 ? R() : V()),
+                                hoverBackgroundColor: (e) => (e.dataIndex === 0 ? R() : V()),
+                                borderWidth: 0,
+                                borderRadius: [
+                                    {
+                                        outerStart: 12,
+                                        outerEnd: 12,
+                                        innerStart: 12,
+                                        innerEnd: 12,
+                                    },
+                                    0,
+                                ],
+                            },
+                        ],
+                    },
+                    options: {
+                        cutout: `78%`,
+                        layout: { padding: 24 },
+                        plugins: {
+                            legend: { display: !1 },
+                            tooltip: {
+                                callbacks: { label: (e) => `${e.label}: ${e.parsed}%` },
+                            },
+                            centerText: { label: `Used Space`, value: `76%` },
+                        },
+                    },
+                    plugins: [oe],
+                },
+                { height: 280 },
+            );
+            this.charts.set(`storage`, t);
+        }
+        initSalesByLocationChart() {
+            let e = document.querySelector(`#salesByLocationChart`);
+            if (!e) return;
+            let t = (e) => (e > 2e3 ? P[5] : e > 1e3 ? P[3] : P[1]),
+                n = D(
+                    e,
+                    {
+                        type: `treemap`,
+                        data: {
+                            datasets: [
+                                {
+                                    label: `Sales`,
+                                    tree: this.data.salesByLocation,
+                                    key: `value`,
+                                    labels: {
+                                        display: !0,
+                                        align: `center`,
+                                        position: `middle`,
+                                        color: (e) => (e.raw && e.raw.v <= 1e3 ? P[5] : U()),
+                                        font: [{ weight: `600`, size: 12 }, { size: 12 }],
+                                        formatter: (e) => [
+                                            e.raw._data.name,
+                                            Number(e.raw.v).toLocaleString(),
+                                        ],
+                                    },
+                                    backgroundColor: (e) =>
+                                        e.type === `data` ? t(e.raw.v) : `transparent`,
+                                    borderColor: () => H(),
+                                    borderWidth: 2,
+                                    borderRadius: 4,
+                                    spacing: 0,
+                                },
+                            ],
+                        },
+                        options: {
+                            plugins: {
+                                legend: { display: !1 },
+                                tooltip: {
+                                    callbacks: {
+                                        title: (e) => e[0]?.raw?._data?.name ?? ``,
+                                        label: (e) => `Sales: ${Number(e.raw.v).toLocaleString()}`,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                    { height: 350, responsiveHeight: [[768, 300]] },
+                );
+            this.charts.set(`salesByLocation`, n);
+        }
+        populateRecentOrders() {
+            let e = document.getElementById(`recent-orders-table`);
+            if (e) {
+                e.replaceChildren();
+                for (let t of this.data.recentOrders) {
+                    let n = document.createElement(`tr`),
+                        r = document.createElement(`td`),
+                        i = document.createElement(`strong`);
+                    ((i.textContent = t.id), r.appendChild(i));
+                    let a = document.createElement(`td`);
+                    a.textContent = t.customer;
+                    let o = document.createElement(`td`);
+                    o.textContent = t.amount;
+                    let s = document.createElement(`td`),
+                        c = document.createElement(`span`);
+                    ((c.className = `badge ${t.status.class}`),
+                        (c.textContent = t.status.text),
+                        s.appendChild(c));
+                    let l = document.createElement(`td`);
+                    ((l.textContent = t.date), n.append(r, a, o, s, l), e.appendChild(n));
+                }
+            }
+        }
+        startRealTimeUpdates() {
+            let e = setInterval(() => this.updateChartsWithRealTimeData(), G);
+            this.intervals.add(e);
+        }
+        updateChartsWithRealTimeData() {
+            let e = this.charts.get(`revenue`);
+            if (e) {
+                let { count: t, unit: n } = this.currentPeriod,
+                    r = this.buildPeriodLabels(t, n),
+                    i = r[r.length - 1];
+                for (
+                    this.data.revenue.push({
+                        month: i,
+                        revenue: Math.floor(Math.random() * 5e4) + 1e4,
+                        profit: Math.floor(Math.random() * 2e4) + 5e3,
+                    });
+                    this.data.revenue.length > t;
+                )
+                    this.data.revenue.shift();
+                (this.data.revenue.forEach((e, t) => {
+                    e.month = r[t];
+                }),
+                    this.setRevenueData(e));
+            }
+            this.updateStatsCards();
+        }
+        updateStatsCards() {
+            document.querySelectorAll(`[data-stat-value]`).forEach((e) => {
+                let t = parseInt(e.textContent.replace(/[^0-9]/g, ``)),
+                    n = t + Math.floor(Math.random() * 10) - 5;
+                n > 0 && this.animateNumber(e, t, n);
+            });
+        }
+        animateNumber(e, t, n) {
+            let r = (n - t) / 30,
+                i = t,
+                a = 0,
+                o = setInterval(() => {
+                    ((i += r), a++);
+                    let t = Math.floor(i).toLocaleString();
+                    ((e.textContent = e.textContent.replace(/[\d,]+/, t)),
+                        a >= 30 &&
+                        (clearInterval(o),
+                            this.intervals.delete(o),
+                            (e.textContent = e.textContent.replace(
+                                /[\d,]+/,
+                                n.toLocaleString(),
+                            ))));
+                }, ce / 30);
+            this.intervals.add(o);
+        }
+        initInteractiveElements() {
+            let e = (e) => {
+                if (e.target.matches(`[data-chart-period]`)) {
+                    let t = e.target.dataset.chartPeriod;
+                    (this.updateChartPeriod(t),
+                        document
+                            .querySelectorAll(`[data-chart-period]`)
+                            .forEach((e) => e.classList.remove(`active`)),
+                        e.target.classList.add(`active`));
+                }
+            },
+                t = (e) => {
+                    if (e.target.matches(`[data-export-chart]`)) {
+                        let t = e.target.dataset.exportChart;
+                        this.exportChart(t);
+                    }
+                };
+            (document.addEventListener(`click`, e),
+                document.addEventListener(`click`, t),
+                this.cleanupFns.push(() => document.removeEventListener(`click`, e)),
+                this.cleanupFns.push(() => document.removeEventListener(`click`, t)));
+        }
+        updateChartPeriod(e) {
+            let t = {
+                "7d": { count: 7, unit: `day` },
+                "30d": { count: 30, unit: `day` },
+                "90d": { count: 90, unit: `day` },
+                "1y": { count: 12, unit: `month` },
+            }[e];
+            if (!t) return;
+            this.currentPeriod = t;
+            let { count: n, unit: r } = t,
+                i = this.buildPeriodLabels(n, r);
+            this.data.revenue = i.map((e) => ({
+                month: e,
+                revenue: Math.floor(Math.random() * 5e4) + 1e4,
+                profit: Math.floor(Math.random() * 2e4) + 5e3,
+            }));
+            let a = this.charts.get(`revenue`);
+            a && this.setRevenueData(a);
+        }
+        setRevenueData(e) {
+            ((e.data.labels = this.data.revenue.map((e) => e.month)),
+                (e.data.datasets[0].data = this.data.revenue.map((e) => e.revenue)),
+                (e.data.datasets[1].data = this.data.revenue.map((e) => e.profit)),
+                e.update());
+        }
+        buildPeriodLabels(e, t) {
+            let n = new Date();
+            if (t === `day`)
+                return Array.from({ length: e }, (t, r) => {
+                    let i = new Date(n);
+                    return (
+                        i.setDate(i.getDate() - (e - 1 - r)),
+                        i.toLocaleDateString(`en-US`, { month: `short`, day: `numeric` })
+                    );
+                });
+            let r = [
+                `Jan`,
+                `Feb`,
+                `Mar`,
+                `Apr`,
+                `May`,
+                `Jun`,
+                `Jul`,
+                `Aug`,
+                `Sep`,
+                `Oct`,
+                `Nov`,
+                `Dec`,
+            ];
+            return Array.from({ length: e }, (t, i) => {
+                let a = new Date(n.getFullYear(), n.getMonth() - (e - 1 - i), 1);
+                return r[a.getMonth()];
+            });
+        }
+        exportChart(e) {
+            let t = this.charts.get(e);
+            if (!t) return;
+            let n = document.createElement(`a`);
+            ((n.download = `${e}-chart.png`),
+                (n.href = t.toBase64Image()),
+                n.click());
+        }
+        destroy() {
+            (this.intervals.forEach((e) => clearInterval(e)),
+                this.intervals.clear(),
+                this.timeouts.forEach((e) => clearTimeout(e)),
+                this.timeouts.clear(),
+                this.cleanupFns.forEach((e) => e()),
+                (this.cleanupFns = []),
+                this.charts.forEach((e) => e.destroy()),
+                this.charts.clear());
+        }
+    },
+    q = e(r(), 1),
+    ue = class {
+        constructor() {
+            ((this.container =
+                document.getElementById(`toast-container`) ||
+                this.createToastContainer()),
+                (this.defaultDuration = 5e3),
+                (this.activeToasts = new Set()),
+                this.init());
+        }
+        init() {
+            (this.container || (this.container = this.createToastContainer()),
+                this.configureSweetAlert());
+        }
+        createToastContainer() {
+            let e = document.createElement(`div`);
+            return (
+                (e.id = `toast-container`),
+                (e.className = `position-fixed top-0 end-0 p-3`),
+                (e.style.zIndex = `11`),
+                e.setAttribute(`aria-live`, `polite`),
+                e.setAttribute(`aria-atomic`, `true`),
+                document.body.appendChild(e),
+                e
+            );
+        }
+        configureSweetAlert() {
+            q.default.mixin({
+                customClass: {
+                    confirmButton: `btn btn-primary me-2`,
+                    cancelButton: `btn btn-secondary`,
+                    popup: `rounded-3 shadow-lg`,
+                    title: `fs-4 fw-bold`,
+                    content: `text-muted`,
+                },
+                buttonsStyling: !1,
+                reverseButtons: !0,
+                focusConfirm: !1,
+                allowOutsideClick: !0,
+                allowEscapeKey: !0,
+                showCloseButton: !0,
+            });
+        }
+        show(e, t = `info`, n = {}) {
+            let r = {
+                message: e,
+                type: t,
+                duration: n.duration || this.defaultDuration,
+                persistent: n.persistent || !1,
+                action: n.action || null,
+                icon: n.icon || this.getIconForType(t),
+            },
+                a = this.createToast(r);
+            this.container.appendChild(a);
+            let o = new i(a, { autohide: !r.persistent, delay: r.duration });
+            return (
+                this.activeToasts.add(o),
+                a.addEventListener(`hidden.bs.toast`, () => {
+                    (this.activeToasts.delete(o), a.remove());
+                }),
+                o.show(),
+                o
+            );
+        }
+        createToast(e) {
+            let t = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
+                n = document.createElement(`div`);
+            ((n.className = `toast align-items-center text-bg-${this._sanitizeType(e.type)} border-0`),
+                (n.id = t),
+                (n.role = `alert`),
+                n.setAttribute(`aria-live`, `assertive`),
+                n.setAttribute(`aria-atomic`, `true`));
+            let r = document.createElement(`div`);
+            r.className = `d-flex`;
+            let i = document.createElement(`div`);
+            i.className = `toast-body d-flex align-items-center`;
+            let a = document.createElement(`i`);
+            ((a.className = `${this._sanitizeIconClass(e.icon)} me-2`),
+                i.appendChild(a));
+            let o = document.createElement(`span`);
+            if (
+                ((o.className = `flex-grow-1`),
+                    (o.textContent = e.message),
+                    i.appendChild(o),
+                    e.action && typeof e.action.handler == `function`)
+            ) {
+                let t = document.createElement(`button`);
+                ((t.type = `button`),
+                    (t.className = `btn btn-sm btn-outline-light me-2`),
+                    (t.textContent = e.action.text || `Action`),
+                    t.addEventListener(`click`, e.action.handler),
+                    i.appendChild(t));
+            }
+            if ((r.appendChild(i), !e.persistent)) {
+                let e = document.createElement(`button`);
+                ((e.type = `button`),
+                    (e.className = `btn-close btn-close-white me-2 m-auto`),
+                    e.setAttribute(`data-bs-dismiss`, `toast`),
+                    e.setAttribute(`aria-label`, `Close`),
+                    r.appendChild(e));
+            }
+            return (n.appendChild(r), n);
+        }
+        _sanitizeType(e) {
+            return [
+                `primary`,
+                `secondary`,
+                `success`,
+                `danger`,
+                `warning`,
+                `info`,
+                `light`,
+                `dark`,
+                `error`,
+            ].includes(e)
+                ? e
+                : `info`;
+        }
+        _sanitizeIconClass(e) {
+            return typeof e == `string` && /^[\w\s-]+$/.test(e)
+                ? e
+                : `bi bi-info-circle-fill`;
+        }
+        getIconForType(e) {
+            let t = {
+                success: `bi bi-check-circle-fill`,
+                error: `bi bi-exclamation-triangle-fill`,
+                warning: `bi bi-exclamation-triangle-fill`,
+                info: `bi bi-info-circle-fill`,
+                primary: `bi bi-info-circle-fill`,
+                secondary: `bi bi-info-circle-fill`,
+                danger: `bi bi-exclamation-triangle-fill`,
+                light: `bi bi-info-circle-fill`,
+                dark: `bi bi-info-circle-fill`,
+            };
+            return t[e] || t.info;
+        }
+        success(e, t = {}) {
+            return this.show(e, `success`, t);
+        }
+        error(e, t = {}) {
+            return this.show(e, `danger`, t);
+        }
+        warning(e, t = {}) {
+            return this.show(e, `warning`, t);
+        }
+        info(e, t = {}) {
+            return this.show(e, `info`, t);
+        }
+        async confirm(e = {}) {
+            return (
+                await q.default.fire({
+                    title: `Are you sure?`,
+                    text: `This action cannot be undone.`,
+                    icon: `warning`,
+                    showCancelButton: !0,
+                    confirmButtonText: `Yes, proceed`,
+                    cancelButtonText: `Cancel`,
+                    ...e,
+                })
+            ).isConfirmed;
+        }
+        async prompt(e = {}) {
+            let t = await q.default.fire({
+                title: `Enter value`,
+                input: `text`,
+                showCancelButton: !0,
+                confirmButtonText: `Submit`,
+                cancelButtonText: `Cancel`,
+                inputValidator: (e) => {
+                    if (!e) return `Please enter a value`;
+                },
+                ...e,
+            });
+            return t.isConfirmed ? t.value : null;
+        }
+        async alert(e, t = `info`, n = ``) {
+            await q.default.fire({
+                title: n,
+                text: e,
+                icon:
+                    {
+                        success: `success`,
+                        error: `error`,
+                        warning: `warning`,
+                        info: `info`,
+                    }[t] || `info`,
+                confirmButtonText: `OK`,
+            });
+        }
+        async showLoading(e = `Loading...`) {
+            q.default.fire({
+                title: e,
+                allowOutsideClick: !1,
+                allowEscapeKey: !1,
+                showConfirmButton: !1,
+                willOpen: () => {
+                    q.default.showLoading();
+                },
+            });
+        }
+        hideLoading() {
+            q.default.close();
+        }
+        async showProgress(e, t) {
+            await q.default.fire({
+                title: e,
+                html: `
         <div class="progress mb-3">
           <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div id="progress-text">Starting...</div>
-      `,allowOutsideClick:!1,showConfirmButton:!1,willOpen:()=>{let e=q.default.getHtmlContainer().querySelector(`.progress-bar`),n=q.default.getHtmlContainer().querySelector(`#progress-text`);t&&typeof t==`function`&&t((t,r)=>{e.style.width=`${t}%`,e.setAttribute(`aria-valuenow`,t),r&&(n.textContent=r),t>=100&&setTimeout(()=>{q.default.close(),this.success(`Operation completed successfully!`)},500)})}})}clearAll(){this.activeToasts.forEach(e=>{e.hide()}),this.activeToasts.clear()}handleRealTimeNotification(e){let{type:t,message:n,priority:r=`normal`,persistent:i=!1}=e,a={persistent:r===`high`||i,duration:r===`high`?1e4:this.defaultDuration};r===`high`&&this.playNotificationSound(),this.show(n,t,a)}playNotificationSound(){let e=new Audio(`data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiS2O/FeCkFKXnJ8N+PQAoSXrTp6qpTFAlEnt//wUfZBBmBzOvQDh8VHH/H7N4=`);e.volume=.3,e.play().catch(()=>{})}addToActivityFeed(e){let t=document.querySelector(`.activity-feed`);if(!t)return;let n=this._sanitizeType(e.type),r=document.createElement(`div`);r.className=`activity-item`;let i=document.createElement(`div`);i.className=`activity-icon bg-${n} bg-opacity-10 text-${n}`;let a=document.createElement(`i`);a.className=this._sanitizeIconClass(this.getIconForType(n)),i.appendChild(a);let o=document.createElement(`div`);o.className=`activity-content`;let s=document.createElement(`p`);s.className=`mb-1`,s.textContent=e.message;let c=document.createElement(`small`);c.className=`text-muted`,c.textContent=`Just now`,o.append(s,c),r.append(i,o),t.insertBefore(r,t.firstChild);let l=t.querySelectorAll(`.activity-item`);l.length>10&&l[l.length-1].remove()}async requestNotificationPermission(){return`Notification`in window&&await Notification.requestPermission()===`granted`}showBrowserNotification(e,t={}){if(`Notification`in window&&Notification.permission===`granted`){let n=new Notification(e,{icon:`/favicon.ico`,badge:`/favicon.ico`,...t});return setTimeout(()=>{n.close()},5e3),n}}},de=class{constructor(){if(this.wrapper=document.getElementById(`admin-wrapper`),this.sidebar=document.getElementById(`admin-sidebar`),this.toggleButton=document.querySelector(`[data-sidebar-toggle]`),this.backdrop=document.querySelector(`.sidebar-backdrop`),!this.wrapper||!this.sidebar||!this.toggleButton){console.warn(`SidebarManager: Essential elements not found. Manager will be inactive.`);return}this.backdrop||(this.backdrop=document.createElement(`div`),this.backdrop.className=`sidebar-backdrop`,this.wrapper.appendChild(this.backdrop)),this.sidebar.id&&this.toggleButton.setAttribute(`aria-controls`,this.sidebar.id),this.init(),this.bindEvents(),this.syncAria()}syncAria(){let e=this.isMobile?this.sidebar.classList.contains(`show`):!this.wrapper.classList.contains(`sidebar-collapsed`);this.toggleButton.setAttribute(`aria-expanded`,String(e))}get isMobile(){return window.innerWidth<992}init(){this.isMobile||localStorage.getItem(`sidebar-collapsed`)===`true`&&(this.wrapper.classList.add(`sidebar-collapsed`),this.toggleButton.classList.add(`is-active`))}bindEvents(){this.toggleButton.addEventListener(`click`,()=>this.toggle()),this.backdrop.addEventListener(`click`,()=>this.closeMobile()),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&this.isMobile&&this.sidebar.classList.contains(`show`)&&this.closeMobile()});let e;window.addEventListener(`resize`,()=>{clearTimeout(e),e=setTimeout(()=>this.handleResize(),150)})}toggle(){this.isMobile?this.toggleMobile():this.toggleDesktop()}toggleDesktop(){this.wrapper.classList.contains(`sidebar-collapsed`)?this.expandDesktop():this.collapseDesktop()}collapseDesktop(){this.wrapper.classList.add(`sidebar-collapsed`),this.toggleButton.classList.add(`is-active`),localStorage.setItem(`sidebar-collapsed`,`true`),this.syncAria()}expandDesktop(){this.wrapper.classList.remove(`sidebar-collapsed`),this.toggleButton.classList.remove(`is-active`),localStorage.setItem(`sidebar-collapsed`,`false`),this.syncAria()}toggleMobile(){this.sidebar.classList.contains(`show`)?this.closeMobile():this.openMobile()}openMobile(){this.sidebar.classList.add(`show`),this.backdrop.classList.add(`show`),document.body.style.overflow=`hidden`,this.syncAria()}closeMobile(){this.sidebar.classList.remove(`show`),this.backdrop.classList.remove(`show`),document.body.style.overflow=``,this.syncAria()}handleResize(){this.isMobile?(this.sidebar.classList.remove(`show`),this.backdrop.classList.remove(`show`),document.body.style.overflow=``):(this.sidebar.classList.remove(`show`),this.backdrop.classList.remove(`show`),document.body.style.overflow=``,localStorage.getItem(`sidebar-collapsed`)===`true`&&(this.wrapper.classList.add(`sidebar-collapsed`),this.toggleButton.classList.add(`is-active`))),this.syncAria()}},J=new Map([[`dashboard`,`bi-speedometer2`],[`users`,`bi-people`],[`analytics`,`bi-graph-up`],[`settings`,`bi-gear`],[`notifications`,`bi-bell`],[`search`,`bi-search`],[`menu`,`bi-list`],[`close`,`bi-x`],[`check`,`bi-check`],[`warning`,`bi-exclamation-triangle`],[`info`,`bi-info-circle`],[`success`,`bi-check-circle`],[`error`,`bi-x-circle`],[`arrow-up`,`bi-arrow-up`],[`arrow-down`,`bi-arrow-down`],[`plus`,`bi-plus`],[`edit`,`bi-pencil`],[`delete`,`bi-trash`],[`download`,`bi-download`],[`upload`,`bi-upload`],[`home`,`bi-house`],[`calendar`,`bi-calendar`],[`clock`,`bi-clock`],[`mail`,`bi-envelope`],[`phone`,`bi-telephone`],[`location`,`bi-geo-alt`],[`heart`,`bi-heart`],[`star`,`bi-star`],[`bookmark`,`bi-bookmark`],[`share`,`bi-share`],[`copy`,`bi-clipboard`],[`link`,`bi-link`],[`external`,`bi-box-arrow-up-right`],[`refresh`,`bi-arrow-clockwise`],[`filter`,`bi-funnel`],[`sort`,`bi-sort-down`],[`grid`,`bi-grid`],[`list`,`bi-list-ul`],[`image`,`bi-image`],[`file`,`bi-file-text`],[`folder`,`bi-folder`],[`eye`,`bi-eye`],[`eye-slash`,`bi-eye-slash`],[`lock`,`bi-lock`],[`unlock`,`bi-unlock`],[`user`,`bi-person`],[`team`,`bi-people`],[`crown`,`bi-award`],[`shield`,`bi-shield-check`]]),fe=`bi-question-circle`,Y=new class{get(e,t=fe){return J.get(e)??t}has(e){return J.has(e)}create(e,t={}){let{className:n=``,...r}=t,i=document.createElement(`i`);i.className=`bi ${this.get(e)} ${n}`.trim();for(let[e,t]of Object.entries(r))i.setAttribute(e,t);return i.hasAttribute(`aria-label`)||i.setAttribute(`aria-hidden`,`true`),i}replaceIcon(e,t){e.className=e.className.replace(/\bbi-[\w-]+/g,``).trim(),e.classList.add(`bi`,this.get(t))}},X=`modulepreload`,pe=function(e,t){return new URL(e,t).href},Z={},Q=function(e,t,n){let r=Promise.resolve();if(t&&t.length>0){let e=document.getElementsByTagName(`link`),i=document.querySelector(`meta[property=csp-nonce]`),a=i?.nonce||i?.getAttribute(`nonce`);function o(e){return Promise.all(e.map(e=>Promise.resolve(e).then(e=>({status:`fulfilled`,value:e}),e=>({status:`rejected`,reason:e}))))}function s(e){return import.meta.resolve?import.meta.resolve(e):new URL(e,import.meta.url).href}r=o(t.map(t=>{if(t=pe(t,n),t=s(t),t in Z)return;Z[t]=!0;let r=t.endsWith(`.css`);for(let n=e.length-1;n>=0;n--){let i=e[n];if(i.href===t&&(!r||i.rel===`stylesheet`))return}let i=document.createElement(`link`);if(i.rel=r?`stylesheet`:X,r||(i.as=`script`),i.crossOrigin=``,i.href=t,a&&i.setAttribute(`nonce`,a),document.head.appendChild(i),r)return new Promise((e,n)=>{i.addEventListener(`load`,e),i.addEventListener(`error`,()=>n(Error(`Unable to preload CSS for ${t}`)))})}))}function i(e){let t=new Event(`vite:preloadError`,{cancelable:!0});if(t.payload=e,window.dispatchEvent(t),!t.defaultPrevented)throw e}return r.then(t=>{for(let e of t||[])e.status===`rejected`&&i(e.reason);return e().catch(i)})},$=new class{constructor(){this.components=new Map,this.isInitialized=!1}async init(){if(!this.isInitialized)try{document.readyState===`loading`&&await new Promise(e=>{document.addEventListener(`DOMContentLoaded`,e)}),this.themeManager=new t,this.notificationManager=new ue,this.sidebarManager=new de,this.iconManager=Y,this.initBootstrapComponents(),await this.initPageComponents(),this.setupEventListeners(),this.localizeShortcutHints(),this.initNavigation(),this.initTooltipsAndPopovers(),this.initAlpine(),this.isInitialized=!0}catch(e){console.error(`❌ Failed to initialize Admin App:`,e)}}initBootstrapComponents(){document.querySelectorAll(`[data-bs-toggle="dropdown"]`).forEach(e=>{new o(e)}),document.querySelectorAll(`.modal`).forEach(e=>{new c(e)}),document.querySelectorAll(`[data-bs-toggle="collapse"]`).forEach(e=>{new l(e,{toggle:!1})}),document.querySelectorAll(`[data-bs-toggle="tab"]`).forEach(e=>{new a(e)}),document.querySelectorAll(`.toast`).forEach(e=>{new i(e)})}initTooltipsAndPopovers(){document.querySelectorAll(`[data-bs-toggle="tooltip"]`).forEach(e=>{new s(e)})}async initPageComponents(){switch(document.body.dataset.page){case`dashboard`:this.components.set(`dashboard`,new le);break;case`users`:await this.initUsersPage();break;case`analytics`:await this.initAnalyticsPage();break;case`forms`:await this.initFormsPage();break;case`products`:await this.initProductsPage();break;case`orders`:await this.initOrdersPage();break;case`reports`:await this.initReportsPage();break;case`messages`:await this.initMessagesPage();break;case`calendar`:await this.initCalendarPage();break;case`settings`:await this.initSettingsPage();break;case`security`:await this.initSecurityPage();break;case`files`:await this.initFilesPage();break;case`help`:await this.initHelpPage();break;case`elements`:await this.initElementsPage();break;default:console.log(`Page-specific components loading complete`)}}async initFormsPage(){try{await Q(()=>import(`./forms-BkV8J-oP.js`),__vite__mapDeps([0,1,2,3]),import.meta.url),console.log(`📝 Forms page script loaded successfully`)}catch(e){console.warn(`Forms components not available:`,e)}}async initUsersPage(){try{await Q(()=>import(`./users-D-c5iPiQ.js`),__vite__mapDeps([4,1,2,5,6]),import.meta.url),console.log(`👥 Users page script loaded successfully`)}catch(e){console.error(`Failed to load users page script:`,e)}}async initAnalyticsPage(){try{await Q(()=>import(`./analytics-DLyF_OpZ.js`),__vite__mapDeps([7,1,2]),import.meta.url),console.log(`📊 Analytics page script loaded successfully`)}catch(e){console.error(`Failed to load analytics page script:`,e)}}async initProductsPage(){try{await Q(()=>import(`./products-lQumS_mP.js`),__vite__mapDeps([8,2,1,6]),import.meta.url),console.log(`📦 Products page script loaded successfully`)}catch(e){console.error(`Failed to load products page script:`,e)}}async initOrdersPage(){try{await Q(()=>import(`./orders-DrJPyqPi.js`),__vite__mapDeps([9,2,1,6]),import.meta.url),console.log(`🛒 Orders page script loaded successfully`)}catch(e){console.error(`Failed to load orders page script:`,e)}}async initReportsPage(){try{await Q(()=>import(`./reports-BtzS_qVO.js`),__vite__mapDeps([10,2,1,11,6]),import.meta.url),console.log(`📊 Reports page script loaded successfully`)}catch(e){console.error(`Failed to load reports page script:`,e)}}async initMessagesPage(){try{await Q(()=>import(`./messages-CsOe5iDw.js`),__vite__mapDeps([12,2,1,6]),import.meta.url),console.log(`💬 Messages page script loaded successfully`)}catch(e){console.error(`Failed to load messages page script:`,e)}}async initCalendarPage(){try{await Q(()=>import(`./calendar-BrA-RY5Z.js`),__vite__mapDeps([13,2,1,5,6]),import.meta.url),console.log(`📅 Calendar page script loaded successfully`)}catch(e){console.error(`Failed to load calendar page script:`,e)}}async initSettingsPage(){try{await Q(()=>import(`./settings-C3b0BAup.js`),__vite__mapDeps([14,2,1,6]),import.meta.url),console.log(`⚙️ Settings page script loaded successfully`)}catch(e){console.error(`Failed to load settings page script:`,e)}}async initSecurityPage(){try{await Q(()=>import(`./security-CXakDHRf.js`),__vite__mapDeps([15,1,2,6]),import.meta.url),console.log(`🔒 Security page script loaded successfully`)}catch(e){console.error(`Failed to load security page script:`,e)}}async initFilesPage(){try{await Q(()=>import(`./files-DdZHtETI.js`),__vite__mapDeps([16,2,1,6]),import.meta.url),console.log(`📁 Files page script loaded successfully`)}catch(e){console.error(`Failed to load files page script:`,e)}}async initHelpPage(){try{await Q(()=>import(`./help-BQKISPnM.js`),__vite__mapDeps([17,1,2,6]),import.meta.url),console.log(`❓ Help page script loaded successfully`)}catch(e){console.error(`Failed to load help page script:`,e)}}async initElementsPage(){try{await Q(()=>import(`./elements-BprsDvyJ.js`),__vite__mapDeps([18,1,2,6]),import.meta.url),console.log(`🧩 Elements page script loaded successfully`)}catch(e){console.error(`Failed to load elements page script:`,e)}}setupEventListeners(){document.addEventListener(`click`,e=>{e.target.matches(`[data-theme-toggle]`)&&this.themeManager.toggleTheme()}),document.addEventListener(`click`,e=>{e.target.closest(`[data-fullscreen-toggle]`)&&(e.preventDefault(),this.toggleFullscreen())}),document.addEventListener(`keydown`,e=>{this.handleKeyboardShortcuts(e)})}handleKeyboardShortcuts(e){if((e.ctrlKey||e.metaKey)&&!e.altKey&&!e.shiftKey&&(e.code===`KeyK`||e.key===`k`||e.key===`K`)){e.preventDefault();let t=document.querySelector(`[data-search-input]`);t&&t.focus()}}localizeShortcutHints(){/Mac|iPhone|iPad|iPod/i.test(navigator.userAgentData&&navigator.userAgentData.platform||navigator.platform||``)&&document.querySelectorAll(`[data-search-input]`).forEach(e=>{e.placeholder&&e.placeholder.includes(`Ctrl+K`)&&(e.placeholder=e.placeholder.replace(`Ctrl+K`,`⌘K`))})}async toggleFullscreen(){try{document.fullscreenElement?await document.exitFullscreen():await document.documentElement.requestFullscreen()}catch(e){console.error(`Fullscreen toggle failed:`,e)}}getComponent(e){return this.components.get(e)}initNavigation(){let e=window.location.pathname,t=[`/elements`,`/elements-buttons.html`,`/elements-alerts.html`,`/elements-badges.html`,`/elements-cards.html`,`/elements-modals.html`,`/elements-forms.html`,`/elements-tables.html`].some(t=>e.includes(t.replace(`.html`,``)));if(t){let t=document.getElementById(`elementsSubmenu`),n=document.querySelector(`[data-bs-target="#elementsSubmenu"]`);if(t&&n){t.classList.add(`show`),n.setAttribute(`aria-expanded`,`true`);let r=document.querySelector(`.nav-submenu a[href="${e}"]`);r&&r.classList.add(`active`)}}document.addEventListener(`click`,e=>{let t=e.target.closest(`[data-bs-toggle="collapse"]`);if(t){let e=t.getAttribute(`data-bs-target`),n=t.getAttribute(`aria-expanded`)===`true`;localStorage.setItem(`submenu-${e}`,(!n).toString())}}),document.querySelectorAll(`[data-bs-toggle="collapse"]`).forEach(e=>{let n=e.getAttribute(`data-bs-target`);if(localStorage.getItem(`submenu-${n}`)===`true`&&!t){let t=document.querySelector(n);t&&(t.classList.add(`show`),e.setAttribute(`aria-expanded`,`true`))}})}initAlpine(){n.data(`searchComponent`,()=>({query:``,results:[],isLoading:!1,async search(){if(this.query.length<2){this.results=[];return}this.isLoading=!0,await new Promise(e=>setTimeout(e,300)),this.results=[{title:`Dashboard`,url:`/`,type:`page`},{title:`Users`,url:`/users`,type:`page`},{title:`Settings`,url:`/settings`,type:`page`},{title:`Analytics`,url:`/analytics`,type:`page`}].filter(e=>e.title.toLowerCase().includes(this.query.toLowerCase())),this.isLoading=!1}})),n.data(`statsCounter`,(e=0,t=1)=>({value:e,init(){setInterval(()=>{this.value+=Math.floor(Math.random()*t)+1},5e3)}})),n.data(`themeSwitch`,()=>({currentTheme:`light`,init(){this.currentTheme=localStorage.getItem(`theme`)||`light`},toggle(){this.currentTheme=this.currentTheme===`light`?`dark`:`light`,document.documentElement.setAttribute(`data-bs-theme`,this.currentTheme),localStorage.setItem(`theme`,this.currentTheme)}})),n.data(`iconDemo`,()=>({getIcon(e){return Y.get(e)}})),n.data(`quickAddForm`,()=>({itemType:`task`,title:``,description:``,priority:`medium`,dateTime:``,assignee:``,init(){let e=new Date;e.setMinutes(e.getMinutes()-e.getTimezoneOffset()),this.dateTime=e.toISOString().slice(0,16)},resetForm(){this.itemType=`task`,this.title=``,this.description=``,this.priority=`medium`,this.assignee=``;let e=new Date;e.setMinutes(e.getMinutes()-e.getTimezoneOffset()),this.dateTime=e.toISOString().slice(0,16)},saveItem(){if(!this.title.trim()){window.AdminApp.notificationManager.warning(`Please enter a title`);return}let e={type:this.itemType,title:this.title,description:this.description,priority:this.itemType===`task`?this.priority:null,dateTime:[`event`,`reminder`].includes(this.itemType)?this.dateTime:null,assignee:this.itemType===`task`?this.assignee:null,createdAt:new Date().toISOString()};console.log(`New item created:`,e),window.AdminApp.notificationManager.success(`${{task:`Task`,note:`Note`,event:`Event`,reminder:`Reminder`}[this.itemType]} "${this.title}" created successfully!`),this.resetForm()}})),n.start(),window.Alpine=n}showDemoNotifications(){setTimeout(()=>{this.notificationManager.info(`New user registered`,{action:{text:`View`,handler:`window.location.href="/users"`}})},3e3),setTimeout(()=>{this.notificationManager.warning(`Server maintenance in 10 minutes`)},6e3),setTimeout(()=>{this.notificationManager.success(`Backup completed successfully`)},9e3)}destroy(){this.components.forEach(e=>{e.destroy&&e.destroy()}),this.components.clear(),this.isInitialized=!1}};$.init(),window.addEventListener(`pagehide`,()=>$.destroy(),{once:!0}),window.AdminApp=$,window.IconManager=Y;export{k as _,P as a,ae as b,z as c,U as d,H as f,A as g,O as h,K as i,L as l,T as m,W as n,F as o,V as p,se as r,R as s,Q as t,B as u,D as v,j as y};
+      `,
+                allowOutsideClick: !1,
+                showConfirmButton: !1,
+                willOpen: () => {
+                    let e = q.default.getHtmlContainer().querySelector(`.progress-bar`),
+                        n = q.default.getHtmlContainer().querySelector(`#progress-text`);
+                    t &&
+                        typeof t == `function` &&
+                        t((t, r) => {
+                            ((e.style.width = `${t}%`),
+                                e.setAttribute(`aria-valuenow`, t),
+                                r && (n.textContent = r),
+                                t >= 100 &&
+                                setTimeout(() => {
+                                    (q.default.close(),
+                                        this.success(`Operation completed successfully!`));
+                                }, 500));
+                        });
+                },
+            });
+        }
+        clearAll() {
+            (this.activeToasts.forEach((e) => {
+                e.hide();
+            }),
+                this.activeToasts.clear());
+        }
+        handleRealTimeNotification(e) {
+            let {
+                type: t,
+                message: n,
+                priority: r = `normal`,
+                persistent: i = !1,
+            } = e,
+                a = {
+                    persistent: r === `high` || i,
+                    duration: r === `high` ? 1e4 : this.defaultDuration,
+                };
+            (r === `high` && this.playNotificationSound(), this.show(n, t, a));
+        }
+        playNotificationSound() {
+            let e = new Audio(
+                `data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcBjiS2O/FeCkFKXnJ8N+PQAoSXrTp6qpTFAlEnt//wUfZBBmBzOvQDh8VHH/H7N4=`,
+            );
+            ((e.volume = 0.3), e.play().catch(() => { }));
+        }
+        addToActivityFeed(e) {
+            let t = document.querySelector(`.activity-feed`);
+            if (!t) return;
+            let n = this._sanitizeType(e.type),
+                r = document.createElement(`div`);
+            r.className = `activity-item`;
+            let i = document.createElement(`div`);
+            i.className = `activity-icon bg-${n} bg-opacity-10 text-${n}`;
+            let a = document.createElement(`i`);
+            ((a.className = this._sanitizeIconClass(this.getIconForType(n))),
+                i.appendChild(a));
+            let o = document.createElement(`div`);
+            o.className = `activity-content`;
+            let s = document.createElement(`p`);
+            ((s.className = `mb-1`), (s.textContent = e.message));
+            let c = document.createElement(`small`);
+            ((c.className = `text-muted`),
+                (c.textContent = `Just now`),
+                o.append(s, c),
+                r.append(i, o),
+                t.insertBefore(r, t.firstChild));
+            let l = t.querySelectorAll(`.activity-item`);
+            l.length > 10 && l[l.length - 1].remove();
+        }
+        async requestNotificationPermission() {
+            return (
+                `Notification` in window &&
+                (await Notification.requestPermission()) === `granted`
+            );
+        }
+        showBrowserNotification(e, t = {}) {
+            if (`Notification` in window && Notification.permission === `granted`) {
+                let n = new Notification(e, {
+                    icon: `/favicon.ico`,
+                    badge: `/favicon.ico`,
+                    ...t,
+                });
+                return (
+                    setTimeout(() => {
+                        n.close();
+                    }, 5e3),
+                    n
+                );
+            }
+        }
+    },
+    de = class {
+        constructor() {
+            if (
+                ((this.wrapper = document.getElementById(`admin-wrapper`)),
+                    (this.sidebar = document.getElementById(`admin-sidebar`)),
+                    (this.toggleButton = document.querySelector(`[data-sidebar-toggle]`)),
+                    (this.backdrop = document.querySelector(`.sidebar-backdrop`)),
+                    !this.wrapper || !this.sidebar || !this.toggleButton)
+            ) {
+                console.warn(
+                    `SidebarManager: Essential elements not found. Manager will be inactive.`,
+                );
+                return;
+            }
+            (this.backdrop ||
+                ((this.backdrop = document.createElement(`div`)),
+                    (this.backdrop.className = `sidebar-backdrop`),
+                    this.wrapper.appendChild(this.backdrop)),
+                this.sidebar.id &&
+                this.toggleButton.setAttribute(`aria-controls`, this.sidebar.id),
+                this.init(),
+                this.bindEvents(),
+                this.syncAria());
+        }
+        syncAria() {
+            let e = this.isMobile
+                ? this.sidebar.classList.contains(`show`)
+                : !this.wrapper.classList.contains(`sidebar-collapsed`);
+            this.toggleButton.setAttribute(`aria-expanded`, String(e));
+        }
+        get isMobile() {
+            return window.innerWidth < 992;
+        }
+        init() {
+            this.isMobile ||
+                (localStorage.getItem(`sidebar-collapsed`) === `true` &&
+                    (this.wrapper.classList.add(`sidebar-collapsed`),
+                        this.toggleButton.classList.add(`is-active`)));
+        }
+        bindEvents() {
+            (this.toggleButton.addEventListener(`click`, () => this.toggle()),
+                this.backdrop.addEventListener(`click`, () => this.closeMobile()),
+                document.addEventListener(`keydown`, (e) => {
+                    e.key === `Escape` &&
+                        this.isMobile &&
+                        this.sidebar.classList.contains(`show`) &&
+                        this.closeMobile();
+                }));
+            let e;
+            window.addEventListener(`resize`, () => {
+                (clearTimeout(e), (e = setTimeout(() => this.handleResize(), 150)));
+            });
+        }
+        toggle() {
+            this.isMobile ? this.toggleMobile() : this.toggleDesktop();
+        }
+        toggleDesktop() {
+            this.wrapper.classList.contains(`sidebar-collapsed`)
+                ? this.expandDesktop()
+                : this.collapseDesktop();
+        }
+        collapseDesktop() {
+            (this.wrapper.classList.add(`sidebar-collapsed`),
+                this.toggleButton.classList.add(`is-active`),
+                localStorage.setItem(`sidebar-collapsed`, `true`),
+                this.syncAria());
+        }
+        expandDesktop() {
+            (this.wrapper.classList.remove(`sidebar-collapsed`),
+                this.toggleButton.classList.remove(`is-active`),
+                localStorage.setItem(`sidebar-collapsed`, `false`),
+                this.syncAria());
+        }
+        toggleMobile() {
+            this.sidebar.classList.contains(`show`)
+                ? this.closeMobile()
+                : this.openMobile();
+        }
+        openMobile() {
+            (this.sidebar.classList.add(`show`),
+                this.backdrop.classList.add(`show`),
+                (document.body.style.overflow = `hidden`),
+                this.syncAria());
+        }
+        closeMobile() {
+            (this.sidebar.classList.remove(`show`),
+                this.backdrop.classList.remove(`show`),
+                (document.body.style.overflow = ``),
+                this.syncAria());
+        }
+        handleResize() {
+            (this.isMobile
+                ? (this.sidebar.classList.remove(`show`),
+                    this.backdrop.classList.remove(`show`),
+                    (document.body.style.overflow = ``))
+                : (this.sidebar.classList.remove(`show`),
+                    this.backdrop.classList.remove(`show`),
+                    (document.body.style.overflow = ``),
+                    localStorage.getItem(`sidebar-collapsed`) === `true` &&
+                    (this.wrapper.classList.add(`sidebar-collapsed`),
+                        this.toggleButton.classList.add(`is-active`))),
+                this.syncAria());
+        }
+    },
+    J = new Map([
+        [`dashboard`, `bi-speedometer2`],
+        [`users`, `bi-people`],
+        [`analytics`, `bi-graph-up`],
+        [`settings`, `bi-gear`],
+        [`notifications`, `bi-bell`],
+        [`search`, `bi-search`],
+        [`menu`, `bi-list`],
+        [`close`, `bi-x`],
+        [`check`, `bi-check`],
+        [`warning`, `bi-exclamation-triangle`],
+        [`info`, `bi-info-circle`],
+        [`success`, `bi-check-circle`],
+        [`error`, `bi-x-circle`],
+        [`arrow-up`, `bi-arrow-up`],
+        [`arrow-down`, `bi-arrow-down`],
+        [`plus`, `bi-plus`],
+        [`edit`, `bi-pencil`],
+        [`delete`, `bi-trash`],
+        [`download`, `bi-download`],
+        [`upload`, `bi-upload`],
+        [`home`, `bi-house`],
+        [`calendar`, `bi-calendar`],
+        [`clock`, `bi-clock`],
+        [`mail`, `bi-envelope`],
+        [`phone`, `bi-telephone`],
+        [`location`, `bi-geo-alt`],
+        [`heart`, `bi-heart`],
+        [`star`, `bi-star`],
+        [`bookmark`, `bi-bookmark`],
+        [`share`, `bi-share`],
+        [`copy`, `bi-clipboard`],
+        [`link`, `bi-link`],
+        [`external`, `bi-box-arrow-up-right`],
+        [`refresh`, `bi-arrow-clockwise`],
+        [`filter`, `bi-funnel`],
+        [`sort`, `bi-sort-down`],
+        [`grid`, `bi-grid`],
+        [`list`, `bi-list-ul`],
+        [`image`, `bi-image`],
+        [`file`, `bi-file-text`],
+        [`folder`, `bi-folder`],
+        [`eye`, `bi-eye`],
+        [`eye-slash`, `bi-eye-slash`],
+        [`lock`, `bi-lock`],
+        [`unlock`, `bi-unlock`],
+        [`user`, `bi-person`],
+        [`team`, `bi-people`],
+        [`crown`, `bi-award`],
+        [`shield`, `bi-shield-check`],
+    ]),
+    fe = `bi-question-circle`,
+    Y = new (class {
+        get(e, t = fe) {
+            return J.get(e) ?? t;
+        }
+        has(e) {
+            return J.has(e);
+        }
+        create(e, t = {}) {
+            let { className: n = ``, ...r } = t,
+                i = document.createElement(`i`);
+            i.className = `bi ${this.get(e)} ${n}`.trim();
+            for (let [e, t] of Object.entries(r)) i.setAttribute(e, t);
+            return (
+                i.hasAttribute(`aria-label`) || i.setAttribute(`aria-hidden`, `true`),
+                i
+            );
+        }
+        replaceIcon(e, t) {
+            ((e.className = e.className.replace(/\bbi-[\w-]+/g, ``).trim()),
+                e.classList.add(`bi`, this.get(t)));
+        }
+    })(),
+    X = `modulepreload`,
+    pe = function (e, t) {
+        return new URL(e, t).href;
+    },
+    Z = {},
+    Q = function (e, t, n) {
+        let r = Promise.resolve();
+        if (t && t.length > 0) {
+            let e = document.getElementsByTagName(`link`),
+                i = document.querySelector(`meta[property=csp-nonce]`),
+                a = i?.nonce || i?.getAttribute(`nonce`);
+            function o(e) {
+                return Promise.all(
+                    e.map((e) =>
+                        Promise.resolve(e).then(
+                            (e) => ({ status: `fulfilled`, value: e }),
+                            (e) => ({ status: `rejected`, reason: e }),
+                        ),
+                    ),
+                );
+            }
+            function s(e) {
+                return import.meta.resolve
+                    ? import.meta.resolve(e)
+                    : new URL(e, import.meta.url).href;
+            }
+            r = o(
+                t.map((t) => {
+                    if (((t = pe(t, n)), (t = s(t)), t in Z)) return;
+                    Z[t] = !0;
+                    let r = t.endsWith(`.css`);
+                    for (let n = e.length - 1; n >= 0; n--) {
+                        let i = e[n];
+                        if (i.href === t && (!r || i.rel === `stylesheet`)) return;
+                    }
+                    let i = document.createElement(`link`);
+                    if (
+                        ((i.rel = r ? `stylesheet` : X),
+                            r || (i.as = `script`),
+                            (i.crossOrigin = ``),
+                            (i.href = t),
+                            a && i.setAttribute(`nonce`, a),
+                            document.head.appendChild(i),
+                            r)
+                    )
+                        return new Promise((e, n) => {
+                            (i.addEventListener(`load`, e),
+                                i.addEventListener(`error`, () =>
+                                    n(Error(`Unable to preload CSS for ${t}`)),
+                                ));
+                        });
+                }),
+            );
+        }
+        function i(e) {
+            let t = new Event(`vite:preloadError`, { cancelable: !0 });
+            if (((t.payload = e), window.dispatchEvent(t), !t.defaultPrevented))
+                throw e;
+        }
+        return r.then((t) => {
+            for (let e of t || []) e.status === `rejected` && i(e.reason);
+            return e().catch(i);
+        });
+    },
+    $ = new (class {
+        constructor() {
+            ((this.components = new Map()), (this.isInitialized = !1));
+        }
+        async init() {
+            if (!this.isInitialized)
+                try {
+                    (document.readyState === `loading` &&
+                        (await new Promise((e) => {
+                            document.addEventListener(`DOMContentLoaded`, e);
+                        })),
+                        (this.themeManager = new t()),
+                        (this.notificationManager = new ue()),
+                        (this.sidebarManager = new de()),
+                        (this.iconManager = Y),
+                        this.initBootstrapComponents(),
+                        await this.initPageComponents(),
+                        this.setupEventListeners(),
+                        this.localizeShortcutHints(),
+                        this.initNavigation(),
+                        this.initTooltipsAndPopovers(),
+                        this.initAlpine(),
+                        (this.isInitialized = !0));
+                } catch (e) {
+                    console.error(`❌ Failed to initialize Admin App:`, e);
+                }
+        }
+        initBootstrapComponents() {
+            (document.querySelectorAll(`[data-bs-toggle="dropdown"]`).forEach((e) => {
+                new o(e);
+            }),
+                document.querySelectorAll(`.modal`).forEach((e) => {
+                    new c(e);
+                }),
+                document
+                    .querySelectorAll(`[data-bs-toggle="collapse"]`)
+                    .forEach((e) => {
+                        new l(e, { toggle: !1 });
+                    }),
+                document.querySelectorAll(`[data-bs-toggle="tab"]`).forEach((e) => {
+                    new a(e);
+                }),
+                document.querySelectorAll(`.toast`).forEach((e) => {
+                    new i(e);
+                }));
+        }
+        initTooltipsAndPopovers() {
+            document.querySelectorAll(`[data-bs-toggle="tooltip"]`).forEach((e) => {
+                new s(e);
+            });
+        }
+        async initPageComponents() {
+            switch (document.body.dataset.page) {
+                case `dashboard`:
+                    this.components.set(`dashboard`, new le());
+                    break;
+                case `users`:
+                    await this.initUsersPage();
+                    break;
+                case `analytics`:
+                    await this.initAnalyticsPage();
+                    break;
+                case `forms`:
+                    await this.initFormsPage();
+                    break;
+                case `products`:
+                    await this.initProductsPage();
+                    break;
+                case `orders`:
+                    await this.initOrdersPage();
+                    break;
+                case `reports`:
+                    await this.initReportsPage();
+                    break;
+                case `messages`:
+                    await this.initMessagesPage();
+                    break;
+                case `calendar`:
+                    await this.initCalendarPage();
+                    break;
+                case `settings`:
+                    await this.initSettingsPage();
+                    break;
+                case `security`:
+                    await this.initSecurityPage();
+                    break;
+                case `files`:
+                    await this.initFilesPage();
+                    break;
+                case `help`:
+                    await this.initHelpPage();
+                    break;
+                case `elements`:
+                    await this.initElementsPage();
+                    break;
+                default:
+                    console.log(`Page-specific components loading complete`);
+            }
+        }
+        async initFormsPage() {
+            try {
+                (await Q(
+                    () => import(`./forms-BkV8J-oP.js`),
+                    __vite__mapDeps([0, 1, 2, 3]),
+                    import.meta.url,
+                ),
+                    console.log(`📝 Forms page script loaded successfully`));
+            } catch (e) {
+                console.warn(`Forms components not available:`, e);
+            }
+        }
+        async initUsersPage() {
+            try {
+                (await Q(
+                    () => import(`./users-D-c5iPiQ.js`),
+                    __vite__mapDeps([4, 1, 2, 5, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`👥 Users page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load users page script:`, e);
+            }
+        }
+        async initAnalyticsPage() {
+            try {
+                (await Q(
+                    () => import(`./analytics-DLyF_OpZ.js`),
+                    __vite__mapDeps([7, 1, 2]),
+                    import.meta.url,
+                ),
+                    console.log(`📊 Analytics page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load analytics page script:`, e);
+            }
+        }
+        async initProductsPage() {
+            try {
+                (await Q(
+                    () => import(`./products-lQumS_mP.js`),
+                    __vite__mapDeps([8, 2, 1, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`📦 Products page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load products page script:`, e);
+            }
+        }
+        async initOrdersPage() {
+            try {
+                (await Q(
+                    () => import(`./orders-DrJPyqPi.js`),
+                    __vite__mapDeps([9, 2, 1, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`🛒 Orders page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load orders page script:`, e);
+            }
+        }
+        async initReportsPage() {
+            try {
+                (await Q(
+                    () => import(`./reports-BtzS_qVO.js`),
+                    __vite__mapDeps([10, 2, 1, 11, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`📊 Reports page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load reports page script:`, e);
+            }
+        }
+        async initMessagesPage() {
+            try {
+                (await Q(
+                    () => import(`./messages-CsOe5iDw.js`),
+                    __vite__mapDeps([12, 2, 1, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`💬 Messages page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load messages page script:`, e);
+            }
+        }
+        async initCalendarPage() {
+            try {
+                (await Q(
+                    () => import(`./calendar-BrA-RY5Z.js`),
+                    __vite__mapDeps([13, 2, 1, 5, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`📅 Calendar page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load calendar page script:`, e);
+            }
+        }
+        async initSettingsPage() {
+            try {
+                (await Q(
+                    () => import(`./settings-C3b0BAup.js`),
+                    __vite__mapDeps([14, 2, 1, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`⚙️ Settings page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load settings page script:`, e);
+            }
+        }
+        async initSecurityPage() {
+            try {
+                (await Q(
+                    () => import(`./security-CXakDHRf.js`),
+                    __vite__mapDeps([15, 1, 2, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`🔒 Security page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load security page script:`, e);
+            }
+        }
+        async initFilesPage() {
+            try {
+                (await Q(
+                    () => import(`./files-DdZHtETI.js`),
+                    __vite__mapDeps([16, 2, 1, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`📁 Files page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load files page script:`, e);
+            }
+        }
+        async initHelpPage() {
+            try {
+                (await Q(
+                    () => import(`./help-BQKISPnM.js`),
+                    __vite__mapDeps([17, 1, 2, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`❓ Help page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load help page script:`, e);
+            }
+        }
+        async initElementsPage() {
+            try {
+                (await Q(
+                    () => import(`./elements-BprsDvyJ.js`),
+                    __vite__mapDeps([18, 1, 2, 6]),
+                    import.meta.url,
+                ),
+                    console.log(`🧩 Elements page script loaded successfully`));
+            } catch (e) {
+                console.error(`Failed to load elements page script:`, e);
+            }
+        }
+        setupEventListeners() {
+            (document.addEventListener(`click`, (e) => {
+                e.target.matches(`[data-theme-toggle]`) &&
+                    this.themeManager.toggleTheme();
+            }),
+                document.addEventListener(`click`, (e) => {
+                    e.target.closest(`[data-fullscreen-toggle]`) &&
+                        (e.preventDefault(), this.toggleFullscreen());
+                }),
+                document.addEventListener(`keydown`, (e) => {
+                    this.handleKeyboardShortcuts(e);
+                }));
+        }
+        handleKeyboardShortcuts(e) {
+            if (
+                (e.ctrlKey || e.metaKey) &&
+                !e.altKey &&
+                !e.shiftKey &&
+                (e.code === `KeyK` || e.key === `k` || e.key === `K`)
+            ) {
+                e.preventDefault();
+                let t = document.querySelector(`[data-search-input]`);
+                t && t.focus();
+            }
+        }
+        localizeShortcutHints() {
+            /Mac|iPhone|iPad|iPod/i.test(
+                (navigator.userAgentData && navigator.userAgentData.platform) ||
+                navigator.platform ||
+                ``,
+            ) &&
+                document.querySelectorAll(`[data-search-input]`).forEach((e) => {
+                    e.placeholder &&
+                        e.placeholder.includes(`Ctrl+K`) &&
+                        (e.placeholder = e.placeholder.replace(`Ctrl+K`, `⌘K`));
+                });
+        }
+        async toggleFullscreen() {
+            try {
+                document.fullscreenElement
+                    ? await document.exitFullscreen()
+                    : await document.documentElement.requestFullscreen();
+            } catch (e) {
+                console.error(`Fullscreen toggle failed:`, e);
+            }
+        }
+        getComponent(e) {
+            return this.components.get(e);
+        }
+        initNavigation() {
+            let e = window.location.pathname,
+                t = [
+                    `/elements`,
+                    `/elements-buttons.html`,
+                    `/elements-alerts.html`,
+                    `/elements-badges.html`,
+                    `/elements-cards.html`,
+                    `/elements-modals.html`,
+                    `/elements-forms.html`,
+                    `/elements-tables.html`,
+                ].some((t) => e.includes(t.replace(`.html`, ``)));
+            if (t) {
+                let t = document.getElementById(`elementsSubmenu`),
+                    n = document.querySelector(`[data-bs-target="#elementsSubmenu"]`);
+                if (t && n) {
+                    (t.classList.add(`show`), n.setAttribute(`aria-expanded`, `true`));
+                    let r = document.querySelector(`.nav-submenu a[href="${e}"]`);
+                    r && r.classList.add(`active`);
+                }
+            }
+            (document.addEventListener(`click`, (e) => {
+                let t = e.target.closest(`[data-bs-toggle="collapse"]`);
+                if (t) {
+                    let e = t.getAttribute(`data-bs-target`),
+                        n = t.getAttribute(`aria-expanded`) === `true`;
+                    localStorage.setItem(`submenu-${e}`, (!n).toString());
+                }
+            }),
+                document
+                    .querySelectorAll(`[data-bs-toggle="collapse"]`)
+                    .forEach((e) => {
+                        let n = e.getAttribute(`data-bs-target`);
+                        if (localStorage.getItem(`submenu-${n}`) === `true` && !t) {
+                            let t = document.querySelector(n);
+                            t &&
+                                (t.classList.add(`show`),
+                                    e.setAttribute(`aria-expanded`, `true`));
+                        }
+                    }));
+        }
+        initAlpine() {
+            (n.data(`searchComponent`, () => ({
+                query: ``,
+                results: [],
+                isLoading: !1,
+                async search() {
+                    if (this.query.length < 2) {
+                        this.results = [];
+                        return;
+                    }
+                    ((this.isLoading = !0),
+                        await new Promise((e) => setTimeout(e, 300)),
+                        (this.results = [
+                            { title: `Dashboard`, url: `/`, type: `page` },
+                            { title: `Users`, url: `/users`, type: `page` },
+                            { title: `Settings`, url: `/settings`, type: `page` },
+                            { title: `Analytics`, url: `/analytics`, type: `page` },
+                        ].filter((e) =>
+                            e.title.toLowerCase().includes(this.query.toLowerCase()),
+                        )),
+                        (this.isLoading = !1));
+                },
+            })),
+                n.data(`statsCounter`, (e = 0, t = 1) => ({
+                    value: e,
+                    init() {
+                        setInterval(() => {
+                            this.value += Math.floor(Math.random() * t) + 1;
+                        }, 5e3);
+                    },
+                })),
+                n.data(`themeSwitch`, () => ({
+                    currentTheme: `light`,
+                    init() {
+                        this.currentTheme = localStorage.getItem(`theme`) || `light`;
+                    },
+                    toggle() {
+                        ((this.currentTheme =
+                            this.currentTheme === `light` ? `dark` : `light`),
+                            document.documentElement.setAttribute(
+                                `data-bs-theme`,
+                                this.currentTheme,
+                            ),
+                            localStorage.setItem(`theme`, this.currentTheme));
+                    },
+                })),
+                n.data(`iconDemo`, () => ({
+                    getIcon(e) {
+                        return Y.get(e);
+                    },
+                })),
+                n.data(`quickAddForm`, () => ({
+                    itemType: `task`,
+                    title: ``,
+                    description: ``,
+                    priority: `medium`,
+                    dateTime: ``,
+                    assignee: ``,
+                    init() {
+                        let e = new Date();
+                        (e.setMinutes(e.getMinutes() - e.getTimezoneOffset()),
+                            (this.dateTime = e.toISOString().slice(0, 16)));
+                    },
+                    resetForm() {
+                        ((this.itemType = `task`),
+                            (this.title = ``),
+                            (this.description = ``),
+                            (this.priority = `medium`),
+                            (this.assignee = ``));
+                        let e = new Date();
+                        (e.setMinutes(e.getMinutes() - e.getTimezoneOffset()),
+                            (this.dateTime = e.toISOString().slice(0, 16)));
+                    },
+                    saveItem() {
+                        if (!this.title.trim()) {
+                            window.AdminApp.notificationManager.warning(
+                                `Please enter a title`,
+                            );
+                            return;
+                        }
+                        let e = {
+                            type: this.itemType,
+                            title: this.title,
+                            description: this.description,
+                            priority: this.itemType === `task` ? this.priority : null,
+                            dateTime: [`event`, `reminder`].includes(this.itemType)
+                                ? this.dateTime
+                                : null,
+                            assignee: this.itemType === `task` ? this.assignee : null,
+                            createdAt: new Date().toISOString(),
+                        };
+                        (console.log(`New item created:`, e),
+                            window.AdminApp.notificationManager.success(
+                                `${{ task: `Task`, note: `Note`, event: `Event`, reminder: `Reminder` }[this.itemType]} "${this.title}" created successfully!`,
+                            ),
+                            this.resetForm());
+                    },
+                })),
+                n.start(),
+                (window.Alpine = n));
+        }
+        showDemoNotifications() {
+            (setTimeout(() => {
+                this.notificationManager.info(`New user registered`, {
+                    action: { text: `View`, handler: `window.location.href="/users"` },
+                });
+            }, 3e3),
+                setTimeout(() => {
+                    this.notificationManager.warning(`Server maintenance in 10 minutes`);
+                }, 6e3),
+                setTimeout(() => {
+                    this.notificationManager.success(`Backup completed successfully`);
+                }, 9e3));
+        }
+        destroy() {
+            (this.components.forEach((e) => {
+                e.destroy && e.destroy();
+            }),
+                this.components.clear(),
+                (this.isInitialized = !1));
+        }
+    })();
+($.init(),
+    window.addEventListener(`pagehide`, () => $.destroy(), { once: !0 }),
+    (window.AdminApp = $),
+    (window.IconManager = Y));
+export {
+    k as _,
+    P as a,
+    ae as b,
+    z as c,
+    U as d,
+    H as f,
+    A as g,
+    O as h,
+    K as i,
+    L as l,
+    T as m,
+    W as n,
+    F as o,
+    V as p,
+    se as r,
+    R as s,
+    Q as t,
+    B as u,
+    D as v,
+    j as y,
+};
