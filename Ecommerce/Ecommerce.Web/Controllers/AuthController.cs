@@ -40,7 +40,7 @@ namespace Ecommerce.Web.Controllers
             if (token == null)
                 return Unauthorized(new
                 {
-                    message = "Invalid username or password."
+                    message = "Invalid email or password."
                 });
 
             return Ok(new

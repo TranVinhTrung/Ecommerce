@@ -59,7 +59,7 @@ namespace Ecommerce.Infrastructure.Identity
 
         public async Task<TokenResponseDto?> LoginAsync(LoginDto dto)
         {
-            var user = await _userManager.FindByNameAsync(dto.UserName);
+            var user = await _userManager.FindByEmailAsync(dto.Email);
 
             if (user == null)
                 return null;
@@ -84,6 +84,7 @@ namespace Ecommerce.Infrastructure.Identity
                 RefreshToken = refreshToken
             };
         }
+
 
         public async Task<TokenResponseDto?> RefreshTokenAsync(string refreshToken)
         {

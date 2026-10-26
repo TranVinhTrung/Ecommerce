@@ -1,3 +1,4 @@
+
 using Ecommerce.Application.DTOs;
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Application.Services;
@@ -5,10 +6,12 @@ using Ecommerce.Core.Interfaces;
 using Ecommerce.Infrastructure.Identity;
 using Ecommerce.Infrastructure.Repositories;
 using Ecommerce.Web.Middleware;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -20,7 +23,7 @@ builder.Services.AddLocalization(options =>
     options.ResourcesPath = "Resources";
 });
 
-// Add services to the container.
+// MVC và cấu hình validation cho API
 builder.Services.AddControllersWithViews()
     .ConfigureApiBehaviorOptions(options =>
     {
@@ -41,76 +44,113 @@ builder.Services.AddControllersWithViews()
             });
         };
     });
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "Enter your JWT token."
-    });
+    options.AddSecurityDefinition("Bearer",
+        new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+            Description = "Enter your JWT token."
+        });
 
     options.AddSecurityRequirement(
-       new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-       {
+        new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+        {
             {
                 new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
-                    Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                    {
-                        Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
+                    Reference =
+                        new Microsoft.OpenApi.Models.OpenApiReference
+                        {
+                            Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
                 },
                 Array.Empty<string>()
             }
-       });
+        });
 });
 
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Database
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// ASP.NET Core Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-//JWT
+// Cookie cho khu vực MVC quản trị
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/AdminWeb/Login";
+    options.AccessDeniedPath = "/AdminWeb/AccessDenied";
+
+    options.Cookie.Name = "__Host-ShopEcom.Admin";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.Cookie.Path = "/";
+
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+});
+
+// Authentication: mặc định dùng cookie cho MVC,
+// JWT Bearer được chỉ định rõ tại các API cần JWT.
 builder.Services
     .AddAuthentication(options =>
     {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme =
+            IdentityConstants.ApplicationScheme;
+
+        options.DefaultSignInScheme =
+            IdentityConstants.ApplicationScheme;
+
+        options.DefaultChallengeScheme =
+            IdentityConstants.ApplicationScheme;
     })
-    .AddJwtBearer(options =>
-    {
-        var jwtKey = builder.Configuration["Jwt:Key"];
-
-        options.TokenValidationParameters = new TokenValidationParameters
+    .AddJwtBearer(
+        JwtBearerDefaults.AuthenticationScheme,
+        options =>
         {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtKey!)),
+            var jwtKey = builder.Configuration["Jwt:Key"];
 
-            ValidateIssuer = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            options.TokenValidationParameters =
+                new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtKey!)),
 
-            ValidateAudience = true,
-            ValidAudience = builder.Configuration["Jwt:Audience"],
+                    ValidateIssuer = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
 
-            ValidateLifetime = true,
+                    ValidateAudience = true,
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
 
-            ClockSkew = TimeSpan.Zero
-        };
-    });
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
 
-//Dependency Injection
+                    RoleClaimType =
+                        System.Security.Claims.ClaimTypes.Role,
+
+                    NameClaimType =
+                        System.Security.Claims.ClaimTypes.Name
+                };
+        });
+
+// Dependency Injection
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
@@ -138,8 +178,7 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 
-
-// Cấu hình ngôn ngữ được hỗ trợ
+// Cấu hình ngôn ngữ
 var supportedCultures = new[]
 {
     new System.Globalization.CultureInfo("vi"),
@@ -148,7 +187,9 @@ var supportedCultures = new[]
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("vi");
+    options.DefaultRequestCulture =
+        new Microsoft.AspNetCore.Localization.RequestCulture("vi");
+
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
@@ -164,34 +205,29 @@ using (var scope = app.Services.CreateScope())
     await RoleSeeder.SeedAsync(roleManager);
 }
 
-
-// Đăng ký middleware
+// Middleware xử lý exception
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 
 app.UseRouting();
 
-// Authentication: kiểm tra JWT token
+// Authentication phải chạy trước Authorization
 app.UseAuthentication();
-
-// Authorization: kiểm tra [Authorize]
 app.UseAuthorization();
 
-// Áp dụng ngôn ngữ cho request
-app.UseRequestLocalization(app.Services.GetRequiredService<
-        Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value);
+// Localization
+app.UseRequestLocalization(
+    app.Services.GetRequiredService<
+        Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>()
+        .Value);
 
 // Swagger
 if (app.Environment.IsDevelopment())

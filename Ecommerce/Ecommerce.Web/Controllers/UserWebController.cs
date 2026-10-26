@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace Ecommerce.Web.Controllers
 {
-    public class HomeController : Controller
+    public class UserWebController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<UserWebController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public UserWebController(ILogger<UserWebController> logger)
         {
             _logger = logger;
         }

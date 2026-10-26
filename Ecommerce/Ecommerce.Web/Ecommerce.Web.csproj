@@ -145,7 +145,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\UserWeb\" />
     <Folder Include="wwwroot\uploads\brands\" />
   </ItemGroup>
 

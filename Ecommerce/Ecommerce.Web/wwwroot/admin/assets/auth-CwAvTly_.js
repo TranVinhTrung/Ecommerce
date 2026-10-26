@@ -51,6 +51,7 @@ document.addEventListener(`alpine:init`, () => {
             errors: {},
             submitting: !1,
             failed: !1,
+            errorMessage: ``,
             validate() {
                 let e = {};
                 return (
@@ -66,13 +67,91 @@ document.addEventListener(`alpine:init`, () => {
             fieldClass(e) {
                 return this.errors[e] ? `is-invalid` : ``;
             },
-            submit() {
-                ((this.failed = !1),
-                    this.validate() &&
-                    ((this.submitting = !0),
-                        this.later(() => {
-                            ((this.submitting = !1), (window.location.href = `./index.html`));
-                        }, i)));
+            async submit() {
+                this.failed = false;
+
+                if (!this.validate()) {
+                    return;
+                }
+
+                this.submitting = true;
+
+                try {
+                    // Bước 1: Đăng nhập bằng API chung
+                    const response = await fetch("/api/Auth/login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email: this.form.email.trim(),
+                            password: this.form.password, 
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+
+                        sessionStorage.removeItem("accessToken");
+                        sessionStorage.removeItem("refreshToken");
+                        this.failed = true;
+                        this.errors = {};
+
+                        this.errorMessage =
+                            response.status === 403
+                                ? "Tài khoản không có quyền truy cập trang quản trị."
+                                : "Email và mật khẩu đó không đúng. Vui lòng thử lại.";
+
+                        return;
+                    }
+
+                    const accessToken = data.token?.accessToken;
+                    const refreshToken = data.token?.refreshToken;
+
+                    if (!accessToken || !refreshToken) {
+                        throw new Error("API không trả về đầy đủ token.");
+                    }
+
+                    // Bước 2: Lưu token
+                    sessionStorage.setItem("accessToken", accessToken);
+                    sessionStorage.setItem("refreshToken", refreshToken);
+
+                    // Bước 3: Yêu cầu server tạo cookie phiên Admin
+                    const adminResponse = await fetch("/api/admin-session/login", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${accessToken}`
+                        },
+                        credentials: "same-origin"
+                    });
+
+
+                    if (!adminResponse.ok) {
+                        sessionStorage.removeItem("accessToken");
+                        sessionStorage.removeItem("refreshToken");
+
+                        this.failed = true;
+                        this.errors = {};
+
+                        if (adminResponse.status === 403) {
+                            this.errorMessage = "Tài khoản không có quyền truy cập trang quản trị.";
+                        } else {
+                            this.errorMessage = "Không thể đăng nhập. Vui lòng thử lại sau.";
+                            console.error( "Không thể tạo phiên Admin:", adminResponse.status);
+                        }
+                        return;
+                    }
+
+                    // Bước 4: Chỉ chuyển trang khi đã tạo cookie thành công
+                    window.location.href = "/AdminWeb/Index";
+
+                } catch (error) {
+                    this.failed = true;
+                    console.error("Login error:", error);
+                } finally {
+                    this.submitting = false;
+                }
             },
         }),
     ),
@@ -236,7 +315,7 @@ document.addEventListener(`alpine:init`, () => {
                     }
                     ((this.submitting = !0),
                         this.later(() => {
-                            ((this.submitting = !1), (window.location.href = `./index.html`));
+                            ((this.submitting = !1), (window.location.href = "/AdminWeb/Index"));
                         }, i));
                 },
             }),
@@ -254,7 +333,7 @@ document.addEventListener(`alpine:init`, () => {
                     ((this.error = ``),
                         (this.submitting = !0),
                         this.later(() => {
-                            ((this.submitting = !1), (window.location.href = `./index.html`));
+                            ((this.submitting = !1), (window.location.href = "/AdminWeb/Index"));
                         }, i));
                 },
             }),
@@ -279,7 +358,7 @@ function l() {
                 (e.preventDefault(),
                     window.history.length > 1
                         ? window.history.back()
-                        : (window.location.href = `./index.html`));
+                    : (window.location.href = "/AdminWeb/Index"));
                 return;
             }
             e.target.closest(`[data-reload]`) &&
