@@ -40,6 +40,11 @@ namespace Ecommerce.Web.Controllers
             return View(products);
         }
 
+        public IActionResult Analytics()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()

@@ -9,6 +9,8 @@
     <link rel="icon" type="image/svg+xml" href="~/admin/assets/icons/favicon.svg" />
     <link rel="icon" type="image/png" href="~/admin/assets/icons/favicon.png" />
     <link rel="stylesheet" href="~/admin/assets/main-ClkrVWiF.css" />
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="~/admin/assets/manifest-D0qHSrzp.json">
 
     <script type="module" crossorigin src="~/admin/assets/main-BRpeuKCG.js"></script>
     <script type="module" crossorigin src="~/admin/assets/rolldown-runtime-hePW80VL.js"></script>
@@ -16,6 +18,7 @@
     <script type="module" crossorigin src="~/admin/assets/vendor-bootstrap-Dj44xPS1.js"></script>
     <script type="module" crossorigin src="~/admin/assets/vendor-charts-D2Sbi086.js"></script>
     <script type="module" crossorigin src="~/admin/assets/main-BomV8aNu.js"></script>
+
 </head>
 <body data-page="dashboard" class="admin-layout">
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -170,7 +173,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./analytics.html">
+                                <a class="nav-link" href="@Url.Action("Analytics", "AdminWeb")">
                                     <i class="bi bi-graph-up"></i>
                                     <span>Analytics</span>
                                 </a>
@@ -586,6 +589,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 

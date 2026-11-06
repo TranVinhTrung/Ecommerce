@@ -33,11 +33,11 @@ document.addEventListener(`alpine:init`, () => {
             async init() {
                 await this.loadProducts();
                 this.filterProducts(),
-                this.calculateStats(),
-                // this.loadSampleData(),
-                setTimeout(() => {
-                    this.initCharts();
-                }, 500);
+                    this.calculateStats(),
+                    // this.loadSampleData(),
+                    setTimeout(() => {
+                        this.initCharts();
+                    }, 500);
             },
             loadSampleData() {
                 this.products = [
@@ -345,7 +345,7 @@ document.addEventListener(`alpine:init`, () => {
             },
 
             async loadProducts() {
-                try { 
+                try {
 
                     const response = await fetch('/api/Products', {
                         method: 'GET',
