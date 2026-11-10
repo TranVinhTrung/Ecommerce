@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ecommerce.Web.Controllers
+namespace Ecommerce.Web.Controllers.Api
 {
     [ApiController]
     [Route("api/[controller]")]

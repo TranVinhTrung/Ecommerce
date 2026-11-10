@@ -2,13 +2,14 @@ using Ecommerce.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Ecommerce.Web.Controllers
+namespace Ecommerce.Web.Controllers.Web.User
 {
-    public class UserWebController : Controller
+    [Area("User")]
+    public class HomeController : Controller
     {
-        private readonly ILogger<UserWebController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public UserWebController(ILogger<UserWebController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }

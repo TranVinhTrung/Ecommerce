@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ecommerce.Web.Controllers
+namespace Ecommerce.Web.Controllers.Web.User
 {
     public class CultureController : Controller
     {

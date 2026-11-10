@@ -2,47 +2,23 @@
 using Ecommerce.Application.Interfaces;
 using Ecommerce.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
-
-
-
-namespace Ecommerce.Web.Controllers
+namespace Ecommerce.Web.Controllers.Web.Admin
 {
-    [Authorize(
-    AuthenticationSchemes = "Identity.Application",
-    Roles = "Admin")]
-    public class AdminWebController : Controller
+    [Area("Admin")]
+    public class AccountController : Controller
     {
-
         private readonly IProductService _productService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AdminWebController(IProductService productService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(IProductService productService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _productService = productService;
             _userManager = userManager;
             _signInManager = signInManager;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> Products([FromQuery] ProductQueryDto query)
-        {
-            var products = await _productService.GetAllAsync(query);
-
-            return View(products);
-        }
-
-        public IActionResult Analytics()
-        {
-            return View();
         }
 
         [AllowAnonymous]

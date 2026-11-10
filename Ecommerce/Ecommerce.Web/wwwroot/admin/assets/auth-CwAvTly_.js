@@ -144,7 +144,7 @@ document.addEventListener(`alpine:init`, () => {
                     }
 
                     // Bước 4: Chỉ chuyển trang khi đã tạo cookie thành công
-                    window.location.href = "/AdminWeb/Index";
+                    window.location.href = "/Admin/Home/Index";
 
                 } catch (error) {
                     this.failed = true;
@@ -315,7 +315,7 @@ document.addEventListener(`alpine:init`, () => {
                     }
                     ((this.submitting = !0),
                         this.later(() => {
-                            ((this.submitting = !1), (window.location.href = "/AdminWeb/Index"));
+                            ((this.submitting = !1), (window.location.href = "/Admin/Home/Index"));
                         }, i));
                 },
             }),
@@ -333,7 +333,7 @@ document.addEventListener(`alpine:init`, () => {
                     ((this.error = ``),
                         (this.submitting = !0),
                         this.later(() => {
-                            ((this.submitting = !1), (window.location.href = "/AdminWeb/Index"));
+                            ((this.submitting = !1), (window.location.href = "/Admin/Home/Index"));
                         }, i));
                 },
             }),
@@ -358,7 +358,7 @@ function l() {
                 (e.preventDefault(),
                     window.history.length > 1
                         ? window.history.back()
-                    : (window.location.href = "/AdminWeb/Index"));
+                    : (window.location.href = "/Admin/Home/Index"));
                 return;
             }
             e.target.closest(`[data-reload]`) &&

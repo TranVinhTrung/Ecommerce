@@ -1,9 +1,9 @@
 ﻿@using Ecommerce.Application.DTOs
-@model PagedResultDto<ProductResponseDto>
-
+@model IEnumerable<CategoryResponseDto>
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
 }
 
 
@@ -19,7 +19,7 @@
                 <p class="text-muted mb-0">Manage your product catalog and inventory</p>
             </div>
             <div class="d-flex gap-2">
-                <button type="button" class="btn btn-outline-secondary" @@click ="exportProducts()">
+                <button type="button" class="btn btn-outline-secondary" @@click="exportProducts()">
                     <i class="bi bi-download me-2"></i>Export
                 </button>
                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#importModal">
@@ -171,28 +171,27 @@
                                            class="form-control form-control-sm"
                                            placeholder="Search products..."
                                            x-model="searchQuery"
-                                    @@input ="filterProducts()"
-                                    style="width: 200px;">
+                                    @@input="filterProducts()"
+                                           style="width: 200px;">
                                     <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-2 text-muted"></i>
                                 </div>
 
                                 <!-- Category Filter -->
                                 <select class="form-select form-select-sm"
                                         x-model="categoryFilter"
-                                    @@change ="filterProducts()"
-                                    style="width: 150px;">
+                                    @@change="filterProducts()"
+                                        style="width: 150px;">
                                     <option value="">All Categories</option>
-                                    <option value="electronics">Electronics</option>
-                                    <option value="clothing">Clothing</option>
-                                    <option value="books">Books</option>
-                                    <option value="home">Home & Garden</option>
+                                    <option value="Laptop">Laptop</option>
+                                    <option value="Giày sân cỏ">Giày sân cỏ</option>
+                                    <option value="Điện thoại">Điện thoại</option>
                                 </select>
 
                                 <!-- Stock Filter -->
                                 <select class="form-select form-select-sm"
                                         x-model="stockFilter"
-                                    @@change ="filterProducts()"
-                                    style="width: 150px;">
+                                    @@change="filterProducts()"
+                                        style="width: 150px;">
                                     <option value="">All Stock</option>
                                     <option value="in-stock">In Stock</option>
                                     <option value="low-stock">Low Stock</option>
@@ -210,13 +209,13 @@
                                 <span x-text="selectedProducts.length"></span> product(s) selected
                             </span>
                             <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary" @@click ="bulkAction('publish')">
+                                <button class="btn btn-sm btn-outline-secondary" @@click="bulkAction('publish')">
                                     <i class="bi bi-eye me-1"></i>Publish
                                 </button>
-                                <button class="btn btn-sm btn-outline-secondary" @@click ="bulkAction('unpublish')">
+                                <button class="btn btn-sm btn-outline-secondary" @@click="bulkAction('unpublish')">
                                     <i class="bi bi-eye-slash me-1"></i>Unpublish
                                 </button>
-                                <button class="btn btn-sm btn-outline-danger" @@click ="bulkAction('delete')">
+                                <button class="btn btn-sm btn-outline-danger" @@click="bulkAction('delete')">
                                     <i class="bi bi-trash me-1"></i>Delete
                                 </button>
                             </div>
@@ -231,15 +230,15 @@
                                     <th style="width: 40px;">
                                         <input type="checkbox"
                                                class="form-check-input"
-                                        @@change ="toggleAll($event.target.checked)"
-                                        :checked="selectedProducts.length === filteredProducts.length && filteredProducts.length > 0">
+                                        @@change="toggleAll($event.target.checked)"
+                                               :checked="selectedProducts.length === filteredProducts.length && filteredProducts.length > 0">
                                     </th>
                                     <th>Product</th>
-                                    <th @@click ="sortBy('category')" class="sortable">Category</th>
-                                    <th @@click ="sortBy('price')" class="sortable">Price</th>
-                                    <th @@click ="sortBy('stock')" class="sortable">Stock</th>
+                                    <th @@click="sortBy('category')" class="sortable">Category</th>
+                                    <th @@click="sortBy('price')" class="sortable">Price</th>
+                                    <th @@click="sortBy('stock')" class="sortable">Stock</th>
                                     <th>Status</th>
-                                    <th @@click ="sortBy('created')" class="sortable">Created</th>
+                                    <th @@click="sortBy('created')" class="sortable">Created</th>
                                     <th style="width: 120px;">Actions</th>
                                 </tr>
                             </thead>
@@ -297,23 +296,23 @@
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a class="dropdown-item" href="#" @@click ="editProduct(product)">
+                                                        <a class="dropdown-item" href="#" @@click="editProduct(product)">
                                                             <i class="bi bi-pencil me-2"></i>Edit
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="#" @@click ="viewProduct(product)">
+                                                        <a class="dropdown-item" href="#" @@click="viewProduct(product)">
                                                             <i class="bi bi-eye me-2"></i>View Details
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="#" @@click ="duplicateProduct(product)">
+                                                        <a class="dropdown-item" href="#" @@click="duplicateProduct(product)">
                                                             <i class="bi bi-copy me-2"></i>Duplicate
                                                         </a>
                                                     </li>
                                                     <li><hr class="dropdown-divider"></li>
                                                     <li>
-                                                        <a class="dropdown-item text-danger" href="#" @@click ="deleteProduct(product)">
+                                                        <a class="dropdown-item text-danger" href="#" @@click="deleteProduct(product)">
                                                             <i class="bi bi-trash me-2"></i>Delete
                                                         </a>
                                                     </li>
@@ -336,15 +335,15 @@
                         <nav>
                             <ul class="pagination pagination-sm mb-0">
                                 <li class="page-item" :class="{ 'disabled': currentPage === 1 }">
-                                    <a class="page-link" href="#" @@click.prevent ="goToPage(currentPage - 1)">Previous</a>
+                                    <a class="page-link" href="#" @@click.prevent="goToPage(currentPage - 1)">Previous</a>
                                 </li>
                                 <template x-for="(page, index) in visiblePages" :key="`page-${index}`">
                                     <li class="page-item" :class="{ 'active': page === currentPage }">
-                                        <a class="page-link" href="#" @@click.prevent ="page !== '...' && goToPage(page)" x-text="page"></a>
+                                        <a class="page-link" href="#" @@click.prevent="page !== '...' && goToPage(page)" x-text="page"></a>
                                     </li>
                                 </template>
                                 <li class="page-item" :class="{ 'disabled': currentPage === totalPages }">
-                                    <a class="page-link" href="#" @@click.prevent ="goToPage(currentPage + 1)">Next</a>
+                                    <a class="page-link" href="#" @@click.prevent="goToPage(currentPage + 1)">Next</a>
                                 </li>
                             </ul>
                         </nav>
@@ -352,7 +351,7 @@
                 </div>
             </div>
 
-        </div> 
+        </div>
         <!-- End Product Management Container -->
 
     </div>

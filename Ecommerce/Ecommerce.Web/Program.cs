@@ -238,6 +238,12 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 
+// Area route
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+// Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
