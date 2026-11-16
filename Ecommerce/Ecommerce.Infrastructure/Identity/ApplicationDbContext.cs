@@ -17,6 +17,7 @@ namespace Ecommerce.Infrastructure.Identity
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoriesGroup> CategoriesGroups { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
@@ -45,6 +46,13 @@ namespace Ecommerce.Infrastructure.Identity
                 .WithMany(c => c.SubCategories)
                 .HasForeignKey(c => c.ParentCategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure relationship between Category and CategoriesGroup
+            builder.Entity<Category>()
+                .HasOne(c => c.CategoryGroup)
+                .WithMany(g => g.Categories)
+                .HasForeignKey(c => c.CategoryGroupId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.Entity<Category>()
                 .HasMany(c => c.Brands)
@@ -126,6 +134,21 @@ namespace Ecommerce.Infrastructure.Identity
             builder.Entity<Payment>()
                 .Property(p => p.Amount)    
                 .HasPrecision(18, 2);
+
+            // Configure CategoriesGroup
+            builder.Entity<CategoriesGroup>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+                entity.Property(e => e.Description)
+                    .HasMaxLength(500);
+                entity.Property(e => e.Icon)
+                    .HasMaxLength(100);
+                entity.HasIndex(e => e.Name)
+                    .IsUnique();
+            });
         }
     }   
 }

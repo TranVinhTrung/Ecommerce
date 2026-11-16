@@ -93,6 +93,8 @@ namespace Ecommerce.Application.Services
                 Stock = product.Stock,
                 CategoryId = product.CategoryId,
                 CategoryName = product.Category.Name,
+                CategoryGroupId = product.Category.CategoryGroupId,
+                CategoryGroupName = product.Category.CategoryGroup?.Name ?? string.Empty,
                 Images = product.Images.Select(image => new ProductImageDto
                 {
                     Id = image.Id,
@@ -128,6 +130,8 @@ namespace Ecommerce.Application.Services
                 Stock = product.Stock,
                 CategoryId = product.CategoryId,
                 CategoryName = product.Category.Name,
+                CategoryGroupId = product.Category.CategoryGroupId,
+                CategoryGroupName = product.Category.CategoryGroup?.Name ?? string.Empty,
                 Images = product.Images.Select(image => new ProductImageDto
                 {
                     Id = image.Id,
@@ -171,7 +175,9 @@ namespace Ecommerce.Application.Services
                 Price = created.Price,
                 Stock = created.Stock,
                 CategoryId = created.CategoryId,
-                CategoryName = category?.Name ?? string.Empty
+                CategoryName = category?.Name ?? string.Empty,
+                CategoryGroupId = category?.CategoryGroupId,
+                CategoryGroupName = category?.CategoryGroup?.Name ?? string.Empty
             };
         }
 

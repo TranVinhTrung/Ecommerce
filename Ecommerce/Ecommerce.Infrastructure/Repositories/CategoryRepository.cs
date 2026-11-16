@@ -26,7 +26,9 @@ namespace Ecommerce.Infrastructure.Repositories
 
         public async Task<Category?> GetByIdAsync(int id)
         {
-            return await _context.Categories.FindAsync(id);
+            return await _context.Categories
+            .Include(c => c.CategoryGroup)
+            .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Category> AddAsync(Category category)
@@ -83,6 +85,6 @@ namespace Ecommerce.Infrastructure.Repositories
                 .Where(c => c.ParentCategoryId == null)
                 .ToListAsync();
         }
-        
+
     }
 }

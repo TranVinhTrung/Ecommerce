@@ -25,6 +25,10 @@ namespace Ecommerce.Application.DTOs
 
         public string CategoryName { get; set; } = string.Empty;
 
+        public int? CategoryGroupId { get; set; }
+
+        public string CategoryGroupName { get; set; } = string.Empty;
+
         public List<ProductImageDto> Images { get; set; } = new();
     }
 }

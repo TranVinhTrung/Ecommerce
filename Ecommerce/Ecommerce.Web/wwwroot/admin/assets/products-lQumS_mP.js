@@ -80,7 +80,7 @@ document.addEventListener('alpine:init', () => {
                             id: item.id,
                             name: item.name,
                             sku: item.sku || `SP-${item.id}`,
-                            category: item.categoryName,
+                            category: item.categoryGroupName,
                             price: item.price,
                             stock: item.stock,
                             status: 'published',

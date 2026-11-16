@@ -22,6 +22,12 @@ namespace Ecommerce.Core.Entities
         // Các danh mục con
         public ICollection<Category> SubCategories { get; set; } = new List<Category>();
 
+        // Foreign Key to CategoriesGroup
+        public int? CategoryGroupId { get; set; }
+
+        // Navigation Property to CategoriesGroup
+        public virtual CategoriesGroup? CategoryGroup { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

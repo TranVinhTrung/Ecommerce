@@ -23,6 +23,7 @@ namespace Ecommerce.Infrastructure.Repositories
         {
             return _context.Products
                     .Include(p => p.Category)
+                    .ThenInclude(c => c.CategoryGroup)
                     .Include(p => p.Images);
         }
 
@@ -38,6 +39,7 @@ namespace Ecommerce.Infrastructure.Repositories
 
             return await _context.Products
                 .Include(p => p.Category)
+                     .ThenInclude(c => c.CategoryGroup)
                 .Include(p => p.Images)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }

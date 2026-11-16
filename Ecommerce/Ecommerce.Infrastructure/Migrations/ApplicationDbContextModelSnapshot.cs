@@ -126,6 +126,47 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.ToTable("CartItems");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Entities.CategoriesGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Icon")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("CategoriesGroup");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -133,6 +174,9 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CategoryGroupId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -151,6 +195,8 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryGroupId");
 
                     b.HasIndex("ParentCategoryId");
 
@@ -613,10 +659,17 @@ namespace Ecommerce.Infrastructure.Migrations
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>
                 {
+                    b.HasOne("Ecommerce.Core.Entities.CategoriesGroup", "CategoryGroup")
+                        .WithMany("Categories")
+                        .HasForeignKey("CategoryGroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("Ecommerce.Core.Entities.Category", "ParentCategory")
                         .WithMany("SubCategories")
                         .HasForeignKey("ParentCategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CategoryGroup");
 
                     b.Navigation("ParentCategory");
                 });
@@ -734,6 +787,11 @@ namespace Ecommerce.Infrastructure.Migrations
             modelBuilder.Entity("Ecommerce.Core.Entities.Cart", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entities.CategoriesGroup", b =>
+                {
+                    b.Navigation("Categories");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Category", b =>

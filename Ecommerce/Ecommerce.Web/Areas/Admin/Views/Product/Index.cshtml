@@ -1,5 +1,5 @@
 ﻿@using Ecommerce.Application.DTOs
-@model IEnumerable<CategoryResponseDto>
+@model IEnumerable<CategoriesGroupResponseDto>
 @{
     ViewData["Title"] = "Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -182,9 +182,10 @@
                                     @@change="filterProducts()"
                                         style="width: 150px;">
                                     <option value="">All Categories</option>
-                                    <option value="Laptop">Laptop</option>
-                                    <option value="Giày sân cỏ">Giày sân cỏ</option>
-                                    <option value="Điện thoại">Điện thoại</option>
+                                    @foreach (var categoriesGroup in Model)
+                                    {
+                                        <option value="@categoriesGroup.Name">@categoriesGroup.Name</option>
+                                    }
                                 </select>
 
                                 <!-- Stock Filter -->

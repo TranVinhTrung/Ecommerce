@@ -178,6 +178,9 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 
+builder.Services.AddScoped<ICategoriesGroupRepository, CategoriesGroupRepository>();
+builder.Services.AddScoped<ICategoriesGroupService, CategoriesGroupService>();
+
 // Cấu hình ngôn ngữ
 var supportedCultures = new[]
 {

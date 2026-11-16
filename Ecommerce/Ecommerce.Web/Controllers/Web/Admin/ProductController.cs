@@ -6,18 +6,18 @@ namespace Ecommerce.Web.Controllers.Web.Admin
     [Area("Admin")]
     public class ProductController : Controller
     {
-        private readonly ICategoryService _categoryService;
+        private readonly ICategoriesGroupService _categoriesGroupService;
 
-        public ProductController(ICategoryService categoryService)
+        public ProductController(ICategoriesGroupService categoriesGroupService)
         {
-            _categoryService = categoryService;
+            _categoriesGroupService = categoriesGroupService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllAsync();
+            var categoriesGroups = await _categoriesGroupService.GetAllAsync();
 
-            return View(categories);
+            return View(categoriesGroups);
         }
     }
 }
